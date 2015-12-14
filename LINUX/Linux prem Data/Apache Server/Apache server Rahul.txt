@@ -1,0 +1,168 @@
+      install yum install httpd*
+  465  yum install http*
+  466  clear
+  467  cd /var/www/html/
+  468  ls
+  469  vim index.html
+  470  service iptables stop
+  471  chkconfig iptables off
+  472  service httpd start
+  473  hostname
+  474  curl -i 192.168.1.2
+  475  links 192.168.1.2
+  476  clear
+  477  hostname
+  478  links redhat.test.com
+  479  clear
+  480  cd ..
+  481  cd .
+  482  cd ..
+  483  cd /var/www/
+  484  mkdir google
+  485  mkdir yahoo
+  486  mkdir facebook
+  487  cd google/
+  488  vim index.html
+  489  cd ..
+  490  cd yahoo/
+  491  vim index.html
+  492  cd /
+  493  cd /var/www
+  494  ls
+  495  cd facebook/
+  496  vim index.html
+  497  vim /etc/httpd/conf/httpd.conf
+  498  service https restrat
+  499  service httpd restrat
+  500  service httpd restart
+  501 service httpd restart
+  502  service httpd restart
+  503  curl -i 192.168.1.2
+
+
+
+*******************************************************************
+HTTP with .htaccess(password)
+
+[root@redhat /]# cd /var/www/google/
+[root@redhat google]# vim .htaccess
+
+
+[root@redhat google]# cat .htaccess
+authName "this is secure site"
+authType basic
+authUserFile /etc/httpd/conf/secure
+require     valid-user
+
+
+[root@redhat google]# vim /etc/httpd/conf/httpd.conf
+
+<Directory /var/www/google>
+allowoverride authconfig
+order allow,deny
+allow from all
+deny from google.test.com
+</Directory>
+
+[root@redhat google]# useradd rahul
+passwd rahul
+[root@redhat google]# cd
+
+[root@redhat google]# htpasswd -c -m /etc/httpd/conf/secure sagar
+
+[root@redhat google]# htpasswd -m /etc/httpd/conf/secure gaurav
+
+new password
+retype
+
+
+[root@redhat google]# cat /etc/httpd/conf/secure
+sagar:$apr1$gcgDJepF$UvwwxLomYgCtuMXi.pAOd0
+barkha:$apr1$tezx6It/$aZ6..r9wVKAyyXUbrqf4s/
+
+
+[root@redhat google]# cd
+[root@redhat ~]# service httpd restart
+Stopping httpd:                                            [FAILED]
+Starting httpd: Apache/2.2.15 mod_ssl/2.2.15 (Pass Phrase Dialog)
+Some of your private key files are encrypted for security reasons.
+In order to read them you have to provide the pass phrases.
+
+Server google.test.com:443 (RSA)
+Enter pass phrase:
+
+OK: Pass Phrase Dialog successful.
+                                                           [  OK  ]
+
+[root@redhat ~]# links google.test.com
+it will ask for password
+[root@redhat ~]# curl -i google.test.com
+
+
+
+
+
+**********************************************************
+
+
+[root@redhat ~]# yum install mod_ssl
+[root@redhat ~]# cd /etc/pki/CA/
+
+
+[root@redhat ~]# openssl genrsa -out private/icici.key -des3 2048
+Generating RSA private key, 2048 bit long modulus
+................................................+++
+...............+++
+e is 65537 (0x10001)
+Enter pass phrase for private/icici.key:
+Verifying - Enter pass phrase for private/icici.key:
+[root@redhat CA]# openssl req -new -x509 -key  private/icici.key -days 365 >icici.crt
+
+Enter pass phrase for private/icici.key:
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [XX]:IN
+State or Province Name (full name) []:DELHI
+Locality Name (eg, city) [Default City]:Vinod nagar
+Organization Name (eg, company) [Default Company Ltd]:HCL
+Organizational Unit Name (eg, section) []:Software
+Common Name (eg, your name or your server's hostname) []:redhat.test.com
+Email Address []:rahulengi@gmail.com
+
+[root@redhat CA]# vim /etc/httpd/conf.d/ssl.conf
+Line no 105 - make entries
+100 #   Server Certificate:
+101 # Point SSLCertificateFile at a PEM encoded certificate.  If
+102 # the certificate is encrypted, then you will be prompted for a
+103 # pass phrase.  Note that a kill -HUP will prompt again.  A new
+104 # certificate can be generated using the genkey(1) command.
+105 #SSLCertificateFile /etc/pki/tls/certs/localhost.crt
+ >> ithis is new entries like 105
+106 SSLCertificateFile /etc/pki/CA/icici.crt
+
+line no 113 make entries
+108 #   Server Private Key:
+109 #   If the key is not combined with the certificate, use this
+110 #   directive to point at the key file.  Keep in mind that if
+111 #   you've both a RSA and a DSA private key you can configure
+112 #   both in parallel (to also allow the use of DSA ciphers, etc.)
+113 #SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
+114 SSLCertificateKeyFile /etc/pki/CA/private/icici.key
+Service httpd restart
+
+Open mozilla google.test.com..it will ask you user name with scure certificate
+
+
+
+
+
+
+
+
+
+

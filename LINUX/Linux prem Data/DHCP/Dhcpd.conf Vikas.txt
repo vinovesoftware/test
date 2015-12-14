@@ -1,0 +1,38 @@
+
+=================
+ /etc/dhcpd.conf
+================= 
+
+ddns-update-style interim;	## Update its records 
+ignore client-updates;		## Ignore requests by client if it updates its hostname
+
+option subnet-mask              255.255.255.0;
+
+allow bootp;
+allow booting;
+
+option ip-forwarding    false;  # No IP forwarding
+option mask-supplier    false;  # Don't respond to ICMP Mask req
+
+subnet 192.168.1.0 netmask 255.255.255.0
+{
+        option routers                  192.168.1.1;
+        option subnet-mask              255.255.255.0;
+
+        range  192.168.1.110 192.168.1.120;
+        default-lease-time 21600;
+        max-lease-time 43200;
+
+        next-server 192.168.1.20;	# PXE server IP
+        filename "linux-install/pxelinux.0";
+
+# For reservation of host
+  #      host vikas
+  #      {
+  #              hardware ethernet 00:0C:29:F1:C4:D3;
+  #              fixed-address 192.168.1.112;
+  #              option host-name "ser.box2.com";
+  #      }
+}
+
+

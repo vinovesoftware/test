@@ -1,0 +1,303 @@
+IP-192.168.1.7
+1.168.192
+hostname-rahul.test.com
+domain test.com
+
+
+Salve IP 192.168.1.5
+hostname-google.test.com
+
+------------------------------------------------------------------
+1- setup ip
+2-setup hostname
+or 
+vim /etc/sysconfig/network
+3-install DNS package
+yum install bind* -y
+
+4-[root@redhat ~]# cd /var/named/chroot/
+
+5-[root@redhat chroot]# ls
+dev  etc  usr  var
+
+6-[root@redhat chroot]# cd  etc
+
+7-[root@redhat etc]# pwd
+/var/named/chroot/etc
+
+8-[root@redhat etc]# cp -p /etc/named.rfc1912.zones named.conf
+
+9-[root@redhat etc]# ll
+total 16
+-rw-r--r--. 1 root root  3519 Jul 25 15:32 localtime
+drwxr-x---. 2 root named 4096 May 26  2010 named
+-rw-r-----. 1 root named  931 Jun 21  2007 named.conf
+drwxr-xr-x. 3 root root  4096 Jul 25 15:32 pki
+
+10-[root@rahul etc]# chgrp named named.conf
+total 16
+-rw-r--r--. 1 root root   265 Aug  7 16:33 localtime
+drwxr-x---. 2 root named 4096 May 26  2010 named
+-rw-r-----. 1 root named  931 Aug  8 01:49 named.conf
+drwxr-xr-x. 3 root root  4096 Aug  7 16:33 pki
+
+11- THis is orginal etc files, we need to copy 17 lines from this files.
+[root@rahul etc]# vim /etc/named.conf
+
+
+[root@rahul etc]# vim /etc/named.conf
+
+10 options {
+ 11         listen-on port 53 { 127.0.0.1; };
+ 12         listen-on-v6 port 53 { ::1; };
+ 13         directory       "/var/named";
+ 14         dump-file       "/var/named/data/cache_dump.db";
+ 15         statistics-file "/var/named/data/named_stats.txt";
+ 16         memstatistics-file "/var/named/data/named_mem_stats.txt";
+ 17         allow-query     { localhost; };
+ 18         recursion yes;
+ 19
+ 20         dnssec-enable yes;
+ 21         dnssec-validation yes;
+ 22         dnssec-lookaside auto;
+ 23
+ 24         /* Path to ISC DLV key */
+ 25         bindkeys-file "/etc/named.iscdlv.key";
+ 26 };
+ :edit named.conf
+
+
+You need to paste these 17 lines 
+
+
+
+10 options {
+ 11         listen-on port 53 { 192.168.1.7; };   server Ip
+ 12         listen-on-v6 port 53 { ::1; };
+ 13         directory       "/var/named";
+ 14         dump-file       "/var/named/data/cache_dump.db";
+ 15         statistics-file "/var/named/data/named_stats.txt";
+ 16         memstatistics-file "/var/named/data/named_mem_stats.txt";
+ 17         allow-query     { any; };
+ 18         allow-transfer  { 192.168.1.5; };
+ 18         recursion yes;
+ 19
+ 20         dnssec-enable yes;
+ 21         dnssec-validation yes;
+ 22         dnssec-lookaside auto;
+ 23
+ 24         /* Path to ISC DLV key */
+ 25         bindkeys-file "/etc/named.iscdlv.key";
+ 26 };
+ 27
+
+ zone "test.com" IN {    domain name
+ 38         type master;
+ 39         file "f.zone";
+ 40         allow-update { none; };
+ 41 };
+ 42
+ 43 zone "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa" IN {
+ 44         type master;
+ 45         file "named.loopback";
+ 46         allow-update { none; };
+ 47 };
+ 48
+ 49 zone "1.168.192.in-addr.arpa" IN {
+ 50         type master;
+ 51         file "r.zone";
+ 52         allow-update { none; };
+
+[root@rahul etc]# cd ..
+[root@rahul chroot]# ls
+dev  etc  usr  var
+[root@rahul chroot]# pwd
+/var/named/chroot
+[root@rahul chroot]#
+
+
+[root@rahul chroot]# cd var/named/
+[root@rahul named]# ls
+[root@rahul named]# pwd
+/var/named/chroot/var/named
+[root@rahul named]#
+
+
+[root@rahul named]# cp -p /var/named/named.localhost f.zone
+
+[root@rahul named]# cp -p /var/named/named.loopback r.zone
+
+
+[root@rahul named]# ll
+total 8
+-rw-r-----. 1 root named 152 Jun 21  2007 f.zone
+-rw-r-----. 1 root named 168 Dec 15  2009 r.zone
+[root@rahul named]#
+
+[root@rahul named]# cp -p /var/named/named.* .
+
+[root@rahul named]# vim f.zone
+
+[root@rahul named]# vim f.zone
+$TTL 1D
+@       IN SOA  rahul.test.com. root.rahul.test.com. (
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+        NS      rahul.test.com.
+rahul   A       192.168.1.7
+google  A       192.168.1.5
+
+[root@rahul named]# vim r.zone
+$TTL 1D
+@       IN SOA  rahul.test.com. root.rahul.test.com. (
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+        NS      rahul.test.com.
+7       PTR     rahul.test.com.
+5       PTR     google.test.com.
+
+[root@rahul named]# cd
+[root@rahul ~]
+
+[root@rahul ~]# vim /etc/resolv.conf
+
+search test.com
+nameserver 192.168.1.7
+
+:q
+
+[root@rahul named]# service named restart
+Stopping named:                                            [  OK  ]
+Starting named:                                            [  OK  ]
+
+
+[root@rahul named]# chkconfig named  on
+[root@rahul named]#
+
+
+[root@rahul named]# ping 192.168.1.7
+
+[root@rahul named]# ping rahul.test.com
+
+
+[root@rahul named]# dig rahul.test.com
+
+[root@rahul named]# dig -x 192.168.1.7
+
+
+[root@rahul named]# nslookup 192.168.1.7
+
+[root@rahul named]# nslookup 192.168.1.7
+
+[root@rahul named]# host rahul.test.com
+
+
+[root@rahul named]# host 192.168.1.7
+
+
+
+192.168.1.2
+
+
+---------------------------------
+
+DNS slave
+192.168.1.2 
+redhat.test.com
+
+1-[root@google yum.repos.d]# yum install bind* -y
+2-[root@google yum.repos.d]# cd /var/named/chroot/
+3-[root@redhat chroot]# ls
+dev  etc  usr  var
+4-[root@redhat chroot]# cd etc/
+[root@redhat etc]# ls
+localtime  named  named.conf  named.iscdlv.key  named.rfc1912.zones  pki  rndc.key
+[root@redhat etc]#
+5-[root@redhat etc]# cp -p /etc/named.rfc1912.zones named.conf
+6-[root@redhat etc]# ll
+total 28
+-rw-r--r--. 1 root root  3519 Jul 24 06:30 localtime
+drwxr-x---. 2 root named 4096 May 26  2010 named
+-rw-r-----. 1 root named  931 Jun 21  2007 named.conf
+-rw-r--r--. 1 root named  601 May 26  2010 named.iscdlv.key
+-rw-r-----. 1 root named  931 Jun 21  2007 named.rfc1912.zones
+drwxr-xr-x. 3 root root  4096 Jul 25 15:32 pki
+-rw-r-----. 1 root named   77 Jul 25 15:31 rndc.key
+[root@redhat etc]#
+
+7-[root@redhat etc]# vim /etc/named.conf
+copy 17 lines from options
+
+options {
+ 11         listen-on port 53 { 127.0.0.1; };
+ 12         listen-on-v6 port 53 { ::1; };
+ 13         directory       "/var/named";
+ 14         dump-file       "/var/named/data/cache_dump.db";
+ 15         statistics-file "/var/named/data/named_stats.txt";
+ 16         memstatistics-file "/var/named/data/named_mem_stats.txt";
+ 17         allow-query     { localhost; };
+ 18         recursion yes;
+ 19
+ 20         dnssec-enable yes;
+ 21         dnssec-validation yes;
+ 22         dnssec-lookaside auto;
+ 23
+ 24         /* Path to ISC DLV key */
+ 25         bindkeys-file "/etc/named.iscdlv.key";
+ 26 }
+
+:edit named.conf
+
+paste here 
+
+options {
+ 11         listen-on port 53 { 192.168.1.2; };
+ 12         listen-on-v6 port 53 { ::1; };
+ 13         directory       "/var/named";
+ 14         dump-file       "/var/named/data/cache_dump.db";
+ 15         statistics-file "/var/named/data/named_stats.txt";
+ 16         memstatistics-file "/var/named/data/named_mem_stats.txt";
+ 17         allow-query     { any; };
+             allow-transfer  { none; };
+ 18         recursion yes;
+ 19
+ 20         dnssec-enable yes;
+ 21         dnssec-validation yes;
+ 22         dnssec-lookaside auto;
+ 23
+ 24         /* Path to ISC DLV key */
+ 25         bindkeys-file "/etc/named.iscdlv.key";
+ 26 };
+
+37 zone "test.com" IN {
+ 38         type slave;
+             master { 192.168.1.7; };
+ 39         file "named.localhost";
+ 40         allow-update { none; };
+ 41 };
+ 42
+ 43 zone "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa" IN {
+ 44         type master;
+ 45         file "named.loopback";
+ 46         allow-update { none; };
+ 47 };
+ 48
+ 49 zone "1.0.0.127.in-addr.arpa" IN {
+ 50         type master;
+ 51         file "named.loopback";
+ 52         allow-update { none; };
+ 53 };
+
+
+
+
+
+
+
+

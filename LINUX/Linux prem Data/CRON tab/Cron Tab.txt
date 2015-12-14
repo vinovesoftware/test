@@ -1,0 +1,148 @@
+       Crontab  is the program used to install, remove or list the tables used
+       to drive the cron(8) daemon.  Each user can have their own crontab, and
+       though  these  are  files  in /var/spool/ , they are not intended to be
+       edited directly. For SELinux in mls mode can be even  more  crontabs  -
+       for each range. For more see selinux(8).
+
+       The cron jobs could be allow or disallow for different users. For clas-
+       sical  crontab  there  exists  cron.allow  and  cron.deny  files.    If
+       cron.allow  file exists, then you must be listed therein in order to be
+       allowed to use this command.  If the cron.allow file does not exist but
+       the  cron.deny  file  does  exist,  then  you must not be listed in the
+       cron.deny file in order to use this command.  If neither of these files
+       exists,  only  the super user will be allowed to use this command.  The
+       second option is using PAM authentication,  where  you  set  up  users,
+       which  could  or  couldnât  use  crontab and also system cron jobs from
+       /etc/cron.d/.
+
+OPTIONS
+       -u     Append  the name of the user whose crontab is to be tweaked.  If
+              this option is not given, crontab examines "your" crontab, i.e.,
+              the  crontab  of  the  person  executing the command.  Note that
+              su(8) can confuse crontab and that if you are running inside  of
+              su(8)  you  should  always  use the -u option for safetyâs sake.
+              from  some  named  file or standard input if the pseudo-filename
+              "-" is given.
+
+       -l     The current crontab will be displayed on standard output.
+       -l     The current crontab will be displayed on standard output.
+
+       -r     The current crontab will be removed.
+
+       -e     This option is used to edit the current crontab using the editor
+              specified  by the VISUAL or EDITOR environment variables.  After
+              you exit from the editor, the modified crontab will be installed
+              automatically.
+
+       -i     This  option  modifies  the  -r  option to prompt the user for a
+              ây/Yâ response before actually removing the crontab.
+
+       -s     It will append the current SELinux security context string as an
+              MLS_LEVEL  setting to the crontab file before editing / replace-
+              ment occurs - see the documentation of MLS_LEVEL in  crontab(5)
+
+**********************************************************************************************************************************
+
+If you want to see the Format of the cron tab then you can use this config files.
+
+[raj@google ~]$ vim /etc/crontab
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  *  command to be executed
+
+
+2- edit cron tab
+[root@google /]# crontab -e
+*            *              *          *          *      /usr/bin/wall "redhat"
+Minutes    Houers      Day     Month     week    command
+[0-59]      [0-23]     [1-31]   [1-12]    [0-6]    command
+
+THis crontab will run every minutes ,hour ,day,month,week
+
+3- list of the crontab entries
+[root@google /]# crontab -l
+*     *     *     *     * /usr/bin/wall "redhat"
+
+4- [root@google /]# service crond restart
+Stopping crond:                                            [  OK  ]
+Starting crond:                                            [  OK  ]
+
+5-[root@google /]# useradd sagar
+
+* * * * *  /usr/bin/wall "redhat"
+
+6-list for the user sagar
+[root@google /]# crontab -u sagar -l
+* * * * *  /usr/bin/wall "redhat"
+
+7-[root@google /]# su - sagar
+[sagar@google ~]$ pwd
+/home/sagar
+[sagar@google ~]$
+8-Now user sagar is trying to edit crontab befor this root was using his shell.Now sagar will use his shell
+[sagar@google ~]$ crontab -e
+
+8-IF you want to deny any particular user then use this config files
+
+[root@google ~]# vim /etc/cron.deny
+sagar
+
+
+9-[root@google ~]# su - sagar
+[sagar@google ~]$
+
+10- You will get the following message beacause we deny user sagar
+[sagar@google ~]$ crontab -e
+You (sagar) are not allowed to use this program (crontab)
+See crontab(1) for more information
+
+
+11-To remove the crontab
+[root@google ~]# crontab -r
+
+
+11- To remove the crontab for a particular user 
+[root@google ~]# crontab -u sagar -r
+[root@google ~]#
+[root@google ~]# crontab -u sagar -l
+no crontab for sagar
+
+
+12-/etc/cron.allow
+
+
+
+****************************************************************
+                                             CRON TAB EXAMPLE
+
+*****************************************************************
+
+Minutes    Houers      Day     Month     week    command
+[0-59]      [0-23]     [1-31]   [1-12]    [0-6]    command
+
+*            *              *          *          *      /usr/bin/wall "redhat"
+
+10          3               2         5           *
+
+It will run morning 7am and 9am
+10        7,9              2         5            *
+
+It will 7am-8am-9am
+10        7-9             2         5             *
+
+It will 7am-8am-9am  along with 5 and 10 date
+10        7-9            5,10     5              *
+
+
+10       *               5,10      5              *
+
+*/10  -every 10 min
+*/10     *                *        *               *
+****************************************************************

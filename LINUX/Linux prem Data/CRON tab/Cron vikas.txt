@@ -1,0 +1,27 @@
+
+
+Min	0-59
+Hour	0-23
+	1-31
+	0-12
+	0-6
+	
+	
+* * * * * echo hello >> /tmp/a
+30 15 * * * 1-4 echo hello >> /tmp/a
+
+
+su - user
+
+crontab -e
+* * * * * echo hello >> /tmp/a
+30 15 * * * 1-4 echo hello >> /tmp/a
+:wq!
+
+crontab -l
+
+
+/var/log/cron
+
+
+

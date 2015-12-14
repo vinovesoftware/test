@@ -1,0 +1,91 @@
+1-Network monitoring and analysis
+2-File system Monitoring
+3-Process Monitoring
+4-Log file analysis
+
+*********************************************************************
+Network monitoring and analysis
+*********************************************************************
+ip - TCP/IP interface configuration and routing utility .Show what interface are available on a system.
+nmap-Show what service are available on a system.
+tcpdump and wireshark-stores and analyzws all network traffice visible to the "sniffing" system
+*********************************************************************
+
+IP utilities
+
+1-ip address show 
+Lists all addresses matching the given criteria
+ip address show
+
+2-ip address flush 
+Deletes all addresses from the specified interface. 
+ip address flush 
+
+3-ip link show -The ip link command is used to query and set properties of the network link represented by the interface
+ip link show
+
+4-
+ip link set 
+Sets various properties of the interface. 
+ip link set interface [on | off]
+
+-Enables or disables the interface. 
+ip link set interface address address
+
+-Sets the link-local address of the interface. 
+ip link set interface broadcast address
+ 
+
+
+5-The ip route command is used to query and set routing. 
+[root@rahul ~]# ip route show
+
+6-arp -Sets or clears the NOARP flag on the interface. 
+[root@rahul ~]# ip route show
+
+*************************************************************************
+Nmap ("Network Mapper")-Show what service are available on a system.This is port scanners utilties.
+nmap-Show what service are available on a system.
+Nmap ("Network Mapper")-
+NMAP -PORT SCANNERS
+Nmap ("Network Mapper")-Show what service are available on a system.This is port scanners utilties.
+nmap-Show what service are available on a system.
+
+[root@rahul tmp]# tar -xvf nmap-6.01.tar
+
+[root@rahul tmp]# ls
+anacdump.txt    mapping-rahul  orbit-root           VMwareDnD
+gconfd-rahul    mapping-root   ssh-jwKfZ14518       vmware-file-mod0
+gconfd-root     nmap-6.01      virtual-root.GBAmhs  vmware-rahul
+keyring-PO6RGA  
+nmap-6.01.tar
+vmware-config0     
+vmware-root
+
+[root@rahul tmp]# cd nmap-6.01
+[root@rahul nmap-6.01]# ls
+[root@rahul nmap-6.01]# ./configure
+[root@rahul nmap-6.01]# make
+[root@rahul nmap-6.01]# make install
+
+[root@rahul nmap-6.01]# nmap 172.24.0.1
+
+Starting Nmap 6.01 ( http://nmap.org ) at 2012-10-23 22:29 PDT
+Warning: File ./nmap-services exists, but Nmap is using /usr/local/bin/../share/nmap/nmap-services for security and consistency reasons.  set NMAPDIR=. to give priority to files in your local directory (may affect the other data files too).
+mass_dns: warning: Unable to determine any DNS servers. Reverse DNS is disabled. Try using --system-dns or specify valid servers with --dns-servers
+Nmap scan report for rahul.test.com (172.24.0.1)
+Host is up (0.0000060s latency).
+Not shown: 995 closed ports
+PORT    STATE SERVICE
+21/tcp  open  ftp
+22/tcp  open  ssh
+23/tcp  open  telnet
+80/tcp  open  http
+111/tcp open  rpcbind
+
+Nmap done: 1 IP address (1 host up) scanned in 0.15 seconds
+
+**************************************************************************************
+TCPDUMP
+************************************************************************************
+Tcpdump- stores and analyzes all network traffic visible to the sniffing system.

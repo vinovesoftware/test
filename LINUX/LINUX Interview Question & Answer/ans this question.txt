@@ -1,0 +1,18 @@
+
+- Tell me the ways to see the process that listens a specific TCP port.
+- What is a run level ?
+- What are the differences between soft and hard link ?
+- What is a sparse file ?
+- What is a zombie process ?
+- How do you setup system activity reporting ?
+- What are the differences between a process and a thread ?
+- What is load average ? 
+- How do you monitor system load ?
+- What is run-queue and how do you use it ?
+- What is swap space ? 
+- What is paging ?
+- How can a filesystem be 110% full ?
+- What are the steps to add a new disk to a Linux system ?
+- What is a daemon process ? what differences it has than the other processes ?
+- How do you change the priority of a process ?
+- What is a major & minor number ?

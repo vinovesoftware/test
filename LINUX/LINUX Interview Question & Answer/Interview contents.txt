@@ -1,0 +1,39 @@
+1-Port number of different servers {cat /etc/services}
+2-Linux Installation(through FTP,HTTP,NFS) -done
+3-boot process
+4-Diff b/w ext3 and ext25)
+ RAID LEVELS and Selection of raid
+6) backup methods
+7) Package management such as Yum server
+8) Kernel Tuning
+9) IPTABLES
+10) TCP WRAPPERS
+11) DIFFERENT RUN LEVELS
+12) USER AND GROUP MANAGEMENT
+13) QUOTA SETTING(user and group)
+14) DIFF B/W CRON AND AT
+15) BASIC SHELL SCRIPTING
+16) Troubleshooting different issues.
+17) Tell me why we should hire you?
+18) DAILY ACTIVITES IN YOUR CURRENT COMPANY
+19) RECENTLY SOLVED CRITICAL ISSUE
+20) LVM (Very Imp)
+21) vertias Volume manager
+22) cluster basic like HAD , GAB , LLT , HEARTBEAT , CONFIG FILES , RESOURSE ,SERVICE GROUPS etc
+23 ) kernel panic troubleshooting
+24) Process management
+25)Configuration part of NFS , NIS , Samba , DHCP , DNS,Apache, Sendmail etc.
+26)Remote administration experience.
+
+
+
+1.Booting procedure of linux server
+2.user administration
+3.LVM -FS creation/ extend / FS issues & recover
+4.Software install / remove / update - RPM or YUM 
+5.Basic services config /troubleshoot - E.G : NFS ,FTP , SAMBA , DNS , DHCP 
+6.Utilization issues - CPU , MEMORY , DISK 
+7.Hardware errors and troubleshoot
+8.PAtch installation / roll back
+
+http://www.scribd.com/doc/40556164/Linux-Interview-Questions-and-Answers

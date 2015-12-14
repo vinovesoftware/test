@@ -1,0 +1,27 @@
+Backup and Recovery in Linux using dd command 
+1. Creating a Hard Disk Image File:
+ It is better to creating an image file of the hard disk and save it in other storage devices for future recovery. The following command will create an image file "appdisk.img" in your home directory from /dev/sda:
+ #dd if=/dev/sda of=~/appdisk.img
+Since you have created an image file, you can compress it with "gzip" or "bzip2":
+ #gzip appdisk.img #generates appdisk.img.gz
+It might take very long time.
+
+2. Creating a Partition Image :
+  Backing up a hard disk partition is much similar to backing up a whole hard disk. 
+ For example, if you want to create an image file from the first partition of /dev/sda, use "dd" like this:
+  #dd if=/dev/sda1 of=~/disk2.img
+Also, you can compress the image file:
+  #gzip disk2.img
+By the way, you can copy a partition to another partition completely, just set "of" to the partition's device name. For example:
+  #dd if=/dev/sda1 of=/dev/sdb5
+This command will copy all the contents from /dev/sda1 to /dev/sdb5.
+
+You must be sure that the capacity of /dev/sdb5 is larger than /dev/sda1.
+
+3. Restoring from an Image File
+ To restore a partition or a hard disk from an image file, just exchange the arguments "if" and "of".
+ For example, restore the whole hard disk from the image file "disk1.img":
+ #dd if=disk1.img of=/dev/sda
+ Restore the first partition of /dev/sda from the image file "disk2.img":
+ #dd if=disk2.img of=/dev/sda1 
+Posted by Kannadasan Periyasamy 

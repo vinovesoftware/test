@@ -1,0 +1,70 @@
+http://www.yolinux.com/
+
+http://www.linuxhomenetworking.com/wiki/
+
+
+http://www.masteringinlinux.com
+
+
+http://www.linuxhowto.in/2012/06/unix-linux-interview-questions-and.html
+
+http://newadmins.blogspot.in/2009/05/dhcp-server-interview-questions-and.html
+
+http://pearlin.info/2012/05/15/linux-interview-questions-and-answers/#&panel1-9
+
+http://www.scribd.com/doc/51167701/Linux-Interview-Questions-and-Answers
+
+good one 
+http://www.linuxhowto.in/2012/06/unix-linux-interview-questions-and.html
+
+http://nextstep4it.com/qa/system_admininstration/linux/index22.html
+
+http://linuxpkd.blogspot.in/2011/06/backup-and-recovery-in-linux-using-dd.html
+---------------------------------------------------------------------------
+for LVM
+http://baskarc12.blogspot.in/2012/10/recovering-lost-lvm-volume-disk.html
+http://venkataraoss.blogspot.in/2011/02/rhce-lvm-explanations-of-basic.html
+-------------------------------------------------------------------------------
+http://bipinkdas.blogspot.in/2007/04/interview-questions-for-linux.html
+
+------------------------------------------------------------------------------
+For iptables 
+http://www.nextstep4it.com/qa/software_firewalls/iptables/index.php
+-----------------------------------------------------------------------
+System Administrator Cheat Sheet II Topics
+http://mj12net.org/index.php/system-administrator-interview-cheat-sheet.html
+
+-------------
+http://linuxtutors.blogspot.in/2011/05/linux-interview-questions-with-answers.html
+-------------------------------------------------
+squid --good one
+http://linuxengines.blogspot.in/2012/04/squid-proxy-server-configuration.html
+
+------------
+http://linuxinterviewquetions.blogspot.in/
+----
+for NFS
+http://www.linuxhowto.in/2012/07/nfs-server-interview-question-and.html
+----------------------
+http://www.linuxhowto.in/2012/06/unix-linux-interview-questions-and.html
+----------------------------
+good one 
+http://www.linuxnix.com/page/36
+http://rhcewithvishal.wordpress.com/about/
+
+-------------
+Squid 
+http://rahultweaks.com/?p=378
+
+-----------
+http://techpreparation.com/linux-interview-questions-answers1.htm
+
+-----------------
+Good 1
+http://linuxsolutions.org.in/training/linux-links/
+
+-------
+http://linuxengines.blogspot.in/2012_04_01_archive.html
+-----------------
+Good 1
+http://www.hscripts.com/tutorials/linux-commands/du.html

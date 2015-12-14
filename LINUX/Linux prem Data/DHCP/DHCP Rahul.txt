@@ -1,0 +1,48 @@
+[root@google /]# rpm -qa |grep dhcp
+dhcp-4.1.1-12.P1.el6.i686
+
+
+This is blank file we need to copy the code from same file
+[root@google /]# vim /etc/dhcp/dhcpd.conf
+
+[root@google /]# vim /usr/share/doc/dhcp-4.1.1/dhcpd.conf.sample
+
+subnet 10.5.5.0 netmask 255.255.255.224 {
+ 48   range 10.5.5.26 10.5.5.30;
+ 49   option domain-name-servers ns1.internal.example.org;
+ 50   option domain-name "internal.example.org";
+ 51   option routers 10.5.5.1;
+ 52   option broadcast-address 10.5.5.31;
+ 53   default-lease-time 600;
+ 54   max-lease-time 7200;
+{
+
+:edit /etc/dhcp/dhcp.conf
+**************************************************
+[root@google /]# vim /etc/dhcp/dhcpd.conf
+
+# DHCP Server Configuration file.
+#   see /usr/share/doc/dhcp*/dhcpd.conf.sample
+#   see 'man 5 dhcpd.conf'
+#
+  subnet 10.5.5.0 netmask 255.255.255.224 {
+  range 10.5.5.26 10.5.5.30;
+  option domain-name-servers ns1.internal.example.org;
+  option domain-name "internal.example.org";
+  option routers 10.5.5.1;
+  option broadcast-address 10.5.5.31;
+  default-lease-time 600;
+  max-lease-time 7200;
+}
+
+host fantasia {
+  hardware ethernet 08:00:07:26:c0:a5;
+  fixed-address fantasia.fugue.com;
+}
+
+
+
+Service dhcpd restart
+chkconfig dhcpd on
+
+Note - Checkon client computer while rebooting

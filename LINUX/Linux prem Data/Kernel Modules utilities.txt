@@ -1,0 +1,57 @@
+Question-Where does the kernel modules located
+Answer-/lib/modules/
+
+
+configuration file - /etc/modprobe.conf
+*****************************************************
+lsmod           >          lists the modules currently reside in the kernel
+[root@google /]# lsmod
+Module                  Size  Used by
+rfcomm                 62325  4
+sco                    14947  2
+bridge                 61127  0
+stp                     1563  1 bridge
+llc                     4392  2 bridge,stp
+bnep                   13370  2
+l2cap                  47768  16 rfcomm,bnep
+nfsd                  234639  13
+lockd                  62121  1 nfsd
+nfs_acl                 2185  1 nfsd
+auth_rpcgss            33115  1 nfsd
+exportfs                3441  1 nfsd
+autofs4                21604  3
+sunrpc                197617  15 nfsd,lockd,nfs_acl,auth_rpcgss
+ip6t_REJECT             3961  2
+nf_conntrack_ipv6      16198  2
+xt_state                1006  2
+nf_conntrack           66010  2 nf_conntrack_ipv6,xt_state
+ip6table_filter         2219  1
+ip6_tables             10809  1 ip6table_filter
+
+[root@google /]# lsmod | grep scsi_transport_spi
+scsi_transport_spi     20340  1 mptspi
+
+________________________________________________________
+modprobe -  modprobe utility load and unload modules
+[root@google /]# modprobe scsi_transport_spi
+_________________________________________________________
+To remove a currently loaded module 
+[root@google /]# modprobe -r scsi_transport_spi
+FATAL: Module scsi_transport_spi is in use.
+_________________________________________________________
+modinfo- modinfo display information about any availabe module
+[root@google /]# modinfo scsi_transport_spi
+filename:       /lib/modules/2.6.32-71.el6.i686/kernel/drivers/scsi/scsi_transport_spi.ko
+license:        GPL
+description:    SPI Transport Attributes
+author:         Martin Hicks
+srcversion:     021280EABF626236FB34FCF
+depends:
+vermagic:       2.6.32-71.el6.i686 SMP mod_unload modversions 686
+_____________________________________________________________
+
+insmod         >          inserts module (Also used modprob)
+
+rmmod         >          unloads module
+
+depmod        >          module dependency database is generates

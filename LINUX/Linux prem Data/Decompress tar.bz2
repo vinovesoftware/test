@@ -1,0 +1,7 @@
+
+[root@rahul tmp]# ls
+ wireshark-1.8.2.tar.bz2
+
+decompress the tar.bz2
+[root@rahul tmp]# tar -xjvf wireshark-1.8.2.tar.bz2
+[root@rahul tmp]# cd wireshark-1.8.2

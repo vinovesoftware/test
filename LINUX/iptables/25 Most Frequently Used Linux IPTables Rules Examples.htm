@@ -1,0 +1,1004 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>25 Most Frequently Used Linux IPTables Rules Examples</title>
+<meta name="robots" content="noodp, noydir" />
+<link rel="stylesheet" href="http://static.thegeekstuff.com/wp-content/themes/thesis_18/style.css?122710-193800" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="http://static.thegeekstuff.com/wp-content/themes/thesis_18/custom/layout.css?042412-45116" type="text/css" media="screen, projection" />
+<!--[if lte IE 8]><link rel="stylesheet" href="http://static.thegeekstuff.com/wp-content/themes/thesis_18/lib/css/ie.css?122710-193752" type="text/css" media="screen, projection" /><![endif]-->
+<link rel="stylesheet" href="http://static.thegeekstuff.com/wp-content/themes/thesis_18/custom/custom.css?040613-214220" type="text/css" media="screen, projection" />
+<link rel="canonical" href="http://www.thegeekstuff.com/2011/06/iptables-rules-examples/" />
+<link rel="alternate" type="application/rss+xml" title="The Geek Stuff RSS Feed" href="http://feedproxy.google.com/TheGeekStuff" />
+<link rel="pingback" href="http://www.thegeekstuff.com/xmlrpc.php" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.thegeekstuff.com/xmlrpc.php?rsd" />
+<link href="http://static.thegeekstuff.com/favicon.ico" rel="icon" type="image/x-icon" />
+<link rel="author" href="https://plus.google.com/112493711428194838421/posts"/>
+<link rel="alternate" type="application/rss+xml" title="The Geek Stuff &raquo; 25 Most Frequently Used Linux IPTables Rules Examples Comments Feed" href="http://www.thegeekstuff.com/2011/06/iptables-rules-examples/feed/" />
+
+<!-- All in One SEO Pack 2.1 by Michael Torbert of Semper Fi Web Design[277,337] -->
+<meta name="description" content="At a first glance, IPTables rules might look cryptic. In this article, I've given 25 practical IPTables rules that you can copy/paste and use it for your" />
+
+<link rel="canonical" href="http://www.thegeekstuff.com/2011/06/iptables-rules-examples/" />
+<!-- /all in one seo pack -->
+</head>
+<body class="custom">
+<div id="container">
+<div id="page">
+	<div id="header">
+<p id="logo"><a href="http://www.thegeekstuff.com"><img src="http://static.thegeekstuff.com/wp-content/themes/thesis_18/custom/images/thegeekstuff.gif" alt="The Geek Stuff" /></a></p><div id="header_ad"><div id="header_ad1">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8090601437064582";
+/* TGS Logo Header Big Image Only */
+google_ad_slot = "4708993701";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div></div>
+	</div>
+<ul class="menu">
+<li class="tab tab-home"><a href="http://www.thegeekstuff.com">Home</a></li>
+<li class="tab tab-1"><a href="http://www.thegeekstuff.com/linux-101-hacks-ebook/" title="Linux 101 Hacks eBook, by Ramesh Natarajan">Free eBook</a></li>
+<li class="tab tab-2"><a href="http://www.thegeekstuff.com/best-of-the-blog/" title="">Start Here</a></li>
+<li class="tab tab-3"><a href="http://www.thegeekstuff.com/contact/" title="Contact">Contact</a></li>
+<li class="tab tab-4"><a href="http://www.thegeekstuff.com/about/" title="">About</a></li>
+</ul>
+	<div id="content_box">
+		<div id="content" class="hfeed">
+
+			<div class="post-7860 post type-post status-publish format-standard hentry category-iptables category-linux tag-iptables-block-ip tag-iptables-block-ip-address tag-iptables-block-port tag-iptables-dnat tag-iptables-howto tag-iptables-log tag-iptables-nat tag-iptables-tutorial tag-iptables-ubuntu post_box top" id="post-7860">
+				<div class="headline_area">
+					<h1 class="entry-title">25 Most Frequently Used Linux IPTables Rules Examples</h1>
+					<p class="headline_meta">by <span class="author vcard fn">Ramesh Natarajan</span> on <abbr class="published" title="2011-06-14">June 14, 2011</abbr></p>
+				</div>
+				<div class="format_text entry-content">
+<div style="margin:7px 0px 6px 0px; padding:5px;"> 
+
+<div style="float:left; width=95px">
+<g:plusone size="medium"></g:plusone>
+</div>
+
+<div style="float:left; padding:2px; width:90px"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.thegeekstuff.com%2F2011%2F06%2Fiptables-rules-examples%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe></iframe>
+</div>
+
+<div style="width=95px">
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+</div>
+
+</div>
+<p><img class="alignright size-medium wp-image-7870" title="IPTables Rules" src="http://static.thegeekstuff.com/wp-content/uploads/2011/06/iptables-rules-300x176.png" alt="" width="300" height="176" />At a first glance, IPTables rules might look cryptic.</p>
+<p>In this article, I&#8217;ve given 25 practical IPTables rules that you can copy/paste and use it for your needs.</p>
+<p>These examples will act as a basic templates for you to tweak these rules to suite your specific requirement.</p>
+<p>For easy reference, all these 25 iptables rules are in shell script format: <a href="http://www.thegeekstuff.com/scripts/iptables-rules">iptables-rules</a><br />
+<span id="more-7860"></span></p>
+<h3>1. Delete Existing Rules</h3>
+<p>Before you start building new set of rules, you might want to clean-up all the default rules, and existing rules. Use the <a href="http://www.thegeekstuff.com/2011/01/redhat-iptables-flush/">iptables flush command</a> as shown below to do this.</p>
+<pre>iptables -F
+(or)
+iptables --flush</pre>
+<h3>2. Set Default Chain Policies</h3>
+<p>The default chain policy is ACCEPT. Change this to DROP for all INPUT, FORWARD, and OUTPUT chains as shown below.</p>
+<pre>iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT DROP</pre>
+<p>When you make both INPUT, and OUTPUT chain&#8217;s default policy as DROP, for every firewall rule requirement you have, you should define two rules. i.e one for incoming and one for outgoing.</p>
+    <center>
+      <div style="margin-left:2px; margin-top:10px; margin-bottom:10px; ">
+
+        <!-- AD BLOCK -->
+		
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8090601437064582";
+/* TGS SinglePost Bottom Medium Rect */
+google_ad_slot = "8643685131";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+        <!-- END AD BLOCK -->
+
+	  </div>
+    </center>
+
+
+<p>In all our examples below, we have two rules for each scenario, as we&#8217;ve set DROP as default policy for both INPUT and OUTPUT chain.</p>
+<p>If you trust your internal users, you can omit the last line above. i.e Do not DROP all outgoing packets by default. In that case, for every firewall rule requirement you have, you just have to define only one rule. i.e define rule only for incoming, as the outgoing is ACCEPT for all packets.</p>
+<p><strong>Note:</strong> If you don&#8217;t know what a chain means, you should first familiarize yourself with the <a href="http://www.thegeekstuff.com/2011/01/iptables-fundamentals/">IPTables fundamentals</a>.</p>
+<h3>3. Block a Specific ip-address</h3>
+<p>Before we proceed further will other examples, if you want to block a specific ip-address, you should do that first as shown below.  Change the &#8220;x.x.x.x&#8221; in the following example to the specific ip-address that you like to block.</p>
+<pre>BLOCK_THIS_IP="x.x.x.x"
+iptables -A INPUT -s "$BLOCK_THIS_IP" -j DROP</pre>
+<p>This is helpful when you find some strange activities from a specific ip-address in your log files, and you want to temporarily block that ip-address while you do further research.</p>
+<p>You can also use one of the following variations, which blocks only TCP traffic on eth0 connection for this ip-address.</p>
+<pre>iptables -A INPUT -i eth0 -s "$BLOCK_THIS_IP" -j DROP
+iptables -A INPUT -i eth0 -p tcp -s "$BLOCK_THIS_IP" -j DROP</pre>
+<h3>4. Allow ALL Incoming SSH</h3>
+<p>The following rules allow ALL incoming ssh connections on eth0 interface.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p><strong>Note</strong>: If you like to understand exactly what each and every one of the arguments means, you should read <a href="http://www.thegeekstuff.com/2011/02/iptables-add-rule/">How to Add IPTables Firewall Rules</a></p>
+<h3>5. Allow Incoming SSH only from a Sepcific Network</h3>
+<p>The following rules allow incoming ssh connections only from 192.168.100.X network.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp -s 192.168.100.0/24 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p>In the above example, instead of /24, you can also use the full subnet mask. i.e &#8220;192.168.100.0/255.255.255.0&#8243;.</p>
+<h3>6. Allow Incoming HTTP and HTTPS</h3>
+<p>The following rules allow all incoming web traffic. i.e HTTP traffic to port 80.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p>The following rules allow all incoming secure web traffic. i.e HTTPS traffic to port 443.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT</pre>
+<h3>7. Combine Multiple Rules Together using MultiPorts</h3>
+<p>When you are allowing incoming connections from outside world to multiple ports, instead of writing individual rules for each and every port, you can combine them together using the multiport extension as shown below.</p>
+<p>The following example allows all incoming SSH, HTTP and HTTPS traffic.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp -m multiport --sports 22,80,443 -m state --state ESTABLISHED -j ACCEPT</pre>
+<h3>8. Allow Outgoing SSH</h3>
+<p>The following rules allow outgoing ssh connection. i.e When you ssh from inside to an outside server.</p>
+<pre>iptables -A OUTPUT -o eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p>Please note that this is slightly different than the incoming rule. i.e We allow both the NEW and ESTABLISHED state on the OUTPUT chain, and only ESTABLISHED state on the INPUT chain. For the incoming rule, it is vice versa.</p>
+<h3>9. Allow Outgoing SSH only to a Specific Network</h3>
+<p>The following rules allow outgoing ssh connection only to a specific network. i.e You an ssh only to 192.168.100.0/24 network from the inside.</p>
+<pre>iptables -A OUTPUT -o eth0 -p tcp -d 192.168.100.0/24 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT</pre>
+<h3>10. Allow Outgoing HTTPS</h3>
+<p>The following rules allow outgoing secure web traffic. This is helpful when you want to allow internet traffic for your users. On servers, these rules are also helpful when you want to use wget to download some files from outside.</p>
+<pre>iptables -A OUTPUT -o eth0 -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i eth0 -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p>Note: For outgoing HTTP web traffic, add two additional rules like the above, and change 443 to 80.</p>
+<h3>11. Load Balance Incoming Web Traffic</h3>
+<p>You can also load balance your incoming web traffic using iptables firewall rules.</p>
+<p>This uses the iptables nth extension. The following example load balances the HTTPS traffic to three different ip-address. For every 3th packet, it is load balanced to the appropriate server (using the counter 0).</p>
+<pre>iptables -A PREROUTING -i eth0 -p tcp --dport 443 -m state --state NEW -m nth --counter 0 --every 3 --packet 0 -j DNAT --to-destination 192.168.1.101:443
+iptables -A PREROUTING -i eth0 -p tcp --dport 443 -m state --state NEW -m nth --counter 0 --every 3 --packet 1 -j DNAT --to-destination 192.168.1.102:443
+iptables -A PREROUTING -i eth0 -p tcp --dport 443 -m state --state NEW -m nth --counter 0 --every 3 --packet 2 -j DNAT --to-destination 192.168.1.103:443</pre>
+<h3>12. Allow Ping from Outside to Inside</h3>
+<p>The following rules allow outside users to be able to ping your servers.</p>
+<pre>iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+iptables -A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT</pre>
+<h3>13. Allow Ping from Inside to Outside</h3>
+<p>The following rules allow you to ping from inside to any of the outside servers.</p>
+<pre>iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type echo-reply -j ACCEPT</pre>
+<h3>14. Allow Loopback Access</h3>
+<p>You should allow full loopback access on your servers. i.e access using 127.0.0.1</p>
+<pre>iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT</pre>
+<h3>15. Allow Internal Network to External network.</h3>
+<p>On the firewall server where one ethernet card is connected to the external, and another ethernet card connected to the internal servers, use the following rules to allow internal network talk to external network.</p>
+<p>In this example, eth1 is connected to external network (internet), and eth0 is connected to internal network (For example: 192.168.1.x).</p>
+<pre>iptables -A FORWARD -i eth0 -o eth1 -j ACCEPT</pre>
+<h3>16. Allow outbound DNS</h3>
+<p>The following rules allow outgoing DNS connections.</p>
+<pre>iptables -A OUTPUT -p udp -o eth0 --dport 53 -j ACCEPT
+iptables -A INPUT -p udp -i eth0 --sport 53 -j ACCEPT</pre>
+<h3>17. Allow NIS Connections</h3>
+<p>If you are running NIS to manage your user accounts, you should allow the NIS connections. Even when the SSH connection is allowed, if you don&#8217;t allow the NIS related ypbind connections, users will not be able to login.</p>
+<p>The NIS ports are dynamic. i.e When the ypbind starts it allocates the ports.</p>
+<p>First do a rpcinfo -p as shown below and get the port numbers. In this example, it was using port 853 and 850.</p>
+<pre>rpcinfo -p | grep ypbind</pre>
+<p>Now allow incoming connection to the port 111, and the ports that were used by ypbind.</p>
+<pre>iptables -A INPUT -p tcp --dport 111 -j ACCEPT
+iptables -A INPUT -p udp --dport 111 -j ACCEPT
+iptables -A INPUT -p tcp --dport 853 -j ACCEPT
+iptables -A INPUT -p udp --dport 853 -j ACCEPT
+iptables -A INPUT -p tcp --dport 850 -j ACCEPT
+iptables -A INPUT -p udp --dport 850 -j ACCEPT</pre>
+<p>The above will not work when you restart the ypbind, as it will have different port numbers that time.</p>
+<p>There are two solutions to this: 1) Use static ip-address for your NIS, or 2) Use some clever shell scripting techniques to automatically grab the dynamic port number from the &#8220;rpcinfo -p&#8221; command output, and use those in the above iptables rules.</p>
+<h3>18. Allow Rsync From a Specific Network</h3>
+<p>The following rules allows rsync only from a specific network.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp -s 192.168.101.0/24 --dport 873 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 873 -m state --state ESTABLISHED -j ACCEPT</pre>
+<h3>19. Allow MySQL connection only from a specific network</h3>
+<p>If you are running MySQL, typically you don&#8217;t want to allow direct connection from outside. In most cases, you might have web server running on the same server where the MySQL database runs.</p>
+<p>However DBA and developers might need to login directly to the MySQL from their laptop and desktop using MySQL client. In those case, you might want to allow your internal network to talk to the MySQL directly as shown below.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp -s 192.168.100.0/24 --dport 3306 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 3306 -m state --state ESTABLISHED -j ACCEPT</pre>
+<h3>20. Allow Sendmail or Postfix Traffic</h3>
+<p>The following rules allow mail traffic. It may be sendmail or postfix.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 25 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 25 -m state --state ESTABLISHED -j ACCEPT</pre>
+<h3>21. Allow IMAP and IMAPS</h3>
+<p>The following rules allow IMAP/IMAP2 traffic.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 143 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 143 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p>The following rules allow IMAPS traffic.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 993 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 993 -m state --state ESTABLISHED -j ACCEPT</pre>
+<h3>22. Allow POP3 and POP3S</h3>
+<p>The following rules allow POP3 access.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 110 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 110 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p>The following rules allow POP3S access.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 995 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 995 -m state --state ESTABLISHED -j ACCEPT</pre>
+<h3>23. Prevent DoS Attack</h3>
+<p>The following iptables rule will help you prevent the Denial of Service (DoS) attack on your webserver.</p>
+<pre>iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT</pre>
+<p>In the above example:</p>
+<ul>
+<li>-m limit: This uses the limit iptables extension</li>
+<li>&#8211;limit 25/minute: This limits only maximum of 25 connection per minute. Change this value based on your specific requirement</li>
+<li>&#8211;limit-burst 100: This value indicates that the limit/minute will be enforced only after the total number of connection have reached the limit-burst level.</li>
+</ul>
+<h3>24. Port Forwarding</h3>
+<p>The following example routes all traffic that comes to the port 442 to 22. This means that the incoming ssh connection can come from both port 22 and 422.</p>
+<pre>iptables -t nat -A PREROUTING -p tcp -d 192.168.102.37 --dport 422 -j DNAT --to 192.168.102.37:22</pre>
+<p>If you do the above, you also need to explicitly allow incoming connection on the port 422.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 422 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 422 -m state --state ESTABLISHED -j ACCEPT</pre>
+<h3>25. Log Dropped Packets</h3>
+<p>You might also want to log all the dropped packets. These rules should be at the bottom.</p>
+<p>First, create a new chain called LOGGING.</p>
+<pre>iptables -N LOGGING</pre>
+<p>Next, make sure all the remaining incoming connections jump to the LOGGING chain as shown below.</p>
+<pre>iptables -A INPUT -j LOGGING</pre>
+<p>Next, log these packets by specifying a custom &#8220;log-prefix&#8221;.</p>
+<pre>iptables -A LOGGING -m limit --limit 2/min -j LOG --log-prefix "IPTables Packet Dropped: " --log-level 7</pre>
+<p>Finally, drop these packets.</p>
+<pre>iptables -A LOGGING -j DROP</pre>
+<p>All of the above 25 iptables rules are in shell script format: <a href="http://www.thegeekstuff.com/scripts/iptables-rules">iptables-rules</a></p>
+<p>Previous articles in the iptables series:</p>
+<ul>
+<li><a href="http://www.thegeekstuff.com/2011/01/iptables-fundamentals/">Linux Firewall Tutorial: IPTables Tables, Chains, Rules Fundamentals</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/01/redhat-iptables-flush/">IPTables Flush: Delete / Remove All Rules On RedHat and CentOS Linux</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/02/iptables-add-rule/">Linux IPTables: How to Add Firewall Rules (With Allow SSH Example)</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/03/iptables-inbound-and-outbound-rules/">Linux IPTables: Incoming and Outgoing Rule Examples (SSH and HTTP)</a></li>
+</ul>
+<div style="margin:7px 0px 3px 0px; padding:5px; background:#F2F0E8">
+
+<div style="float:left; width=95px">
+<g:plusone size="medium"></g:plusone>
+</div>
+
+<div style="float:left; width=95px">
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+</div>
+
+<div style="float:left; padding:2px; width:90px"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.thegeekstuff.com%2F2011%2F06%2Fiptables-rules-examples%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe></iframe>
+</div>
+
+<div style="padding:1px">
+&gt;&nbsp;<a href="#respond">Add your comment</a> 
+</div>
+
+</div>
+<br/>
+<div id="subscribebox">
+<a rel="nofollow" href="http://www.thegeekstuff.com/linux-sysadmin"><img class="alignright" title="Linux Sysadmin Course" src="http://static.thegeekstuff.com/images/linux-sysadmin-200-166.png" alt="Linux Sysadmin Course" /></a>
+Linux provides several powerful administrative tools and utilities which will help you to manage your systems effectively. If you don’t know what these tools are and how to use them, you could be spending lot of time trying to perform even the basic administrative tasks. The focus of this course is to help you understand system administration tools, which will help you to become an effective Linux system administrator.<br/> Get the <a href="http://www.thegeekstuff.com/linux-sysadmin" class="button">Linux Sysadmin Course</a> Now!
+</div>
+<h3>If you enjoyed this article, you might also like..</h3>
+<table>
+<tr>
+<td valign="top">
+<ol>
+<li><a href="http://www.thegeekstuff.com/2010/12/50-unix-linux-sysadmin-tutorials/">50 Linux Sysadmin Tutorials</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/11/50-linux-commands/">50 Most Frequently Used Linux Commands (With Examples)</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/12/linux-performance-monitoring-tools/">Top 25 Best Linux Performance Monitoring and Debugging Tools</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples/">Mommy, I found it! – 15 Practical Linux Find Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/linux-101-hacks-ebook/">Linux 101 Hacks 2nd Edition eBook</a>&nbsp;<img title="Linux 101 Hacks Book" src="http://static.thegeekstuff.com/images/free-small.png" alt="Linux 101 Hacks Book" /></li>
+</ol>
+</td>
+<td>
+<ul>
+<li><a href="http://www.thegeekstuff.com/2010/01/awk-introduction-tutorial-7-awk-print-examples/">Awk Introduction – 7 Awk Print Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/10/unix-sed-tutorial-advanced-sed-substitution-examples/">Advanced Sed Substitution Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/8-essential-vim-editor-navigation-fundamentals/">8 Essential Vim Editor Navigation Fundamentals</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/06/iptables-rules-examples/">25 Most Frequently Used Linux IPTables Rules Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/turbocharge-putty-with-12-powerful-add-ons-software-for-geeks-3/">Turbocharge PuTTY with 12 Powerful Add-Ons</a></li>
+</ul>
+</td>
+</tr>
+</table>
+<br />
+<center> 
+<table border=0 cellspacing="10"> 
+<tr> 
+<td> 
+<a rel="nofollow" href="http://www.thegeekstuff.com/bash-101-hacks-ebook/"><img title="Bash 101 Hacks Book" src="http://static.thegeekstuff.com/images/bash-132.png" alt="Bash 101 Hacks Book" /></a> 
+</td> 
+<td> 
+<a rel="nofollow" href="http://www.thegeekstuff.com/sed-awk-101-hacks-ebook/"><img title="Sed and Awk 101 Hacks Book" src="http://static.thegeekstuff.com/images/sed-and-awk-132.png" alt="Sed and Awk 101 Hacks Book" /></a> 
+</td> 
+<td> 
+<a rel="nofollow" href="http://www.thegeekstuff.com/nagios-core-ebook/"><img title="Nagios Core 3 Book" src="http://static.thegeekstuff.com/images/nagios-core-132.png" alt="Nagios Core 3 Book" /></a> 
+</td> 
+<td> 
+<a rel="nofollow" href="http://www.thegeekstuff.com/vim-101-hacks-ebook/"><img title="Vim 101 Hacks Book" src="http://static.thegeekstuff.com/images/vim-101-hacks-132.png" alt="Vim 101 Hacks Book" /></a> 
+</td> 
+</tr> 
+</table> 
+</center>
+<br />
+<div id="tgs-tags">
+Tags: <a href="http://www.thegeekstuff.com/tag/iptables-block-ip/" rel="tag">IPTables Block IP</a>, <a href="http://www.thegeekstuff.com/tag/iptables-block-ip-address/" rel="tag">IPTables Block IP Address</a>, <a href="http://www.thegeekstuff.com/tag/iptables-block-port/" rel="tag">IPTables Block Port</a>, <a href="http://www.thegeekstuff.com/tag/iptables-dnat/" rel="tag">IPTables DNAT</a>, <a href="http://www.thegeekstuff.com/tag/iptables-howto/" rel="tag">IPTables HowTo</a>, <a href="http://www.thegeekstuff.com/tag/iptables-log/" rel="tag">IPTables Log</a>, <a href="http://www.thegeekstuff.com/tag/iptables-nat/" rel="tag">IPTables NAT</a>, <a href="http://www.thegeekstuff.com/tag/iptables-tutorial/" rel="tag">IPTables Tutorial</a>, <a href="http://www.thegeekstuff.com/tag/iptables-ubuntu/" rel="tag">IPTables Ubuntu</a></div>
+				</div>
+			</div>
+
+			<div id="comments">
+				<div id="comments_intro" class="comments_intro">
+					<p><span class="bracket">{</span> <span>33</span> comments&#8230; read them below or <a href="#respond" rel="nofollow">add one</a> <span class="bracket">}</span></p>
+				</div>
+
+				<dl id="comment_list">
+					<dt class="comment even thread-even depth-1" id="comment-111729">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-111729" title="Permalink to this comment" rel="nofollow">1</a></span>
+<span class="comment_author">kgas</span>
+<span class="comment_time">June 14, 2011 at 3:42 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-111729">
+<p>Good one and expecting all your iptables related writings in a single pdf file. Thanks</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-111731">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-111731" title="Permalink to this comment" rel="nofollow">2</a></span>
+<span class="comment_author">diptanu</span>
+<span class="comment_time">June 14, 2011 at 3:57 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-111731">
+<p>Hi,Thanks alot for the above info.However would like to know that if the blocking or allowing through iptables is possible for specific MAC address over internet, as because if my eth0 is using a local ip 10.10.10.10 which is natted via public ip eg 100.100.100.100 and connected to internet via ISP, then someone from internet with specific MAC id (allowed in iptables) should be  able to ssh to my public ip (100.100.100.100) and the rest should be dropped.</p>
+<p>Is that possible over the internet</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-111736">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-111736" title="Permalink to this comment" rel="nofollow">3</a></span>
+<span class="comment_author">Manoj</span>
+<span class="comment_time">June 14, 2011 at 4:25 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-111736">
+<p>Keep Writing <img src='http://www.thegeekstuff.com/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' />  Gr8 Work!!!</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-111807">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-111807" title="Permalink to this comment" rel="nofollow">4</a></span>
+<span class="comment_author">Gareth Williams</span>
+<span class="comment_time">June 14, 2011 at 11:16 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-111807">
+<p>Diptanu you cannot filter packets based on mac addresses.  Even if that was possible that host is not on your subnet therefore you do not communicate to it or it to you using MAC address.  When communicating to that host all traffic is routed via your default gateway.</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-111847">
+<span class="avatar"><a href="http://marcinrybak.com" rel="nofollow"></a></span>
+<span class="comment_num"><a href="#comment-111847" title="Permalink to this comment" rel="nofollow">5</a></span>
+<span class="comment_author"><a href='http://marcinrybak.com' rel='external nofollow' class='url'>Marcin Rybak</a></span>
+<span class="comment_time">June 14, 2011 at 2:26 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-111847">
+<p>First ruleset should go deep deep , if somebody has default policy to drop &#8211; first rule:<br />
+iptables -F, will cut him out. You have been warned <img src='http://www.thegeekstuff.com/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-111853">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-111853" title="Permalink to this comment" rel="nofollow">6</a></span>
+<span class="comment_author">Kishore</span>
+<span class="comment_time">June 14, 2011 at 2:59 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-111853">
+<p>Very Useful <img src='http://www.thegeekstuff.com/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-111855">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-111855" title="Permalink to this comment" rel="nofollow">7</a></span>
+<span class="comment_author">Vonskippy</span>
+<span class="comment_time">June 14, 2011 at 3:03 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-111855">
+<p>A default rule should always be block ALL outbound traffic on TCP25 except to your own email server.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-112384">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-112384" title="Permalink to this comment" rel="nofollow">8</a></span>
+<span class="comment_author">vierupro</span>
+<span class="comment_time">June 16, 2011 at 3:07 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-112384">
+<p>Good collection of iptables rules!<br />
+Just wanted to mention that &#8221; -m limit &#8221;  does match packets not connections, so in your example you will match 25 packets per minute, which I think is not what you want to.<br />
+The solution to limit the number of connections is to use connlimit match.<br />
+an example:<br />
+iptables -A INPUT -p tcp &#8211;syn &#8211;dport 80 -m connlimit &#8211;connlimit-above 15 &#8211;connlimit-mask 32 -j REJECT &#8211;reject-with tcp-reset<br />
+that will reject connections above 15 from one source IP &#8211; a very good rule to defend a web server.</p>
+<p>Also it will be great to add to your list of rules an example with &#8220;hashlimit&#8221; match, which has more options when you want to protect from a DDoS attack.<br />
+With &#8220;limit&#8221; match you can limit the global rate of packets per time interval, but with &#8220;hashlimit&#8221;, you can limit them per IP, per combination IP + port, etc.<br />
+So an example for a web server will be something like that:<br />
+iptables -A INPUT -p tcp &#8211;dport 80 -m hashlimit &#8211;hashlimit 45/sec &#8211;hashlimit-burst 60 &#8211;hashlimit-mode srcip<br />
+&#8211;hashlimit-name DDOS &#8211;hashlimit-htable-size 32768 &#8211;hashlimit-htable-max 32768 &#8211;hashlimit-htable-gcinterval 1000<br />
+&#8211;hashlimit-htable-expire 100000 -j ACCEPT</p>
+<p>Hope this will help someone.</p>
+<p>Anyway, thanks for a good article!</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-115409">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-115409" title="Permalink to this comment" rel="nofollow">9</a></span>
+<span class="comment_author">Paul M</span>
+<span class="comment_time">June 30, 2011 at 7:59 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-115409">
+<p>it makes sense to have a generic rule permitting established/related for input and forwarded, allow all outbound traffic from the firewall itself, and then control traffic in the forwarded or input chain, otherwise it gets too complex too quickly.</p>
+<p>and don&#8217;t forget to add rules for the lo interface.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-134022">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-134022" title="Permalink to this comment" rel="nofollow">10</a></span>
+<span class="comment_author">jalal hajigholamali</span>
+<span class="comment_time">October 21, 2011 at 11:04 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-134022">
+<p>very good&#8230; thanks</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-154095">
+<span class="avatar"><a href="http://www.coraltele.com" rel="nofollow"></a></span>
+<span class="comment_num"><a href="#comment-154095" title="Permalink to this comment" rel="nofollow">11</a></span>
+<span class="comment_author"><a href='http://www.coraltele.com' rel='external nofollow' class='url'>Sharad</a></span>
+<span class="comment_time">December 12, 2011 at 6:11 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-154095">
+<p>Really helped me a lot&#8230;</p>
+<p>Just 1 question, after implementing some of the policies, My server is unable to resolve any domain name.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-179100">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-179100" title="Permalink to this comment" rel="nofollow">12</a></span>
+<span class="comment_author">Rod_Moncada</span>
+<span class="comment_time">January 16, 2012 at 4:48 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-179100">
+<p>Hey Sharad,</p>
+<p>Actually need to open port 53 for INPUT. Something like this will work:<br />
+# dnsserver=ipaddress<br />
+# iptables -A INPUT -p udp &#8211;sport 53 &#8211;dport 1024:65535 -d $dnsserver -j ACCEPT</p>
+<p>That worked for me, please some advice if there&#8217;s a better or safer way <img src='http://www.thegeekstuff.com/wp-includes/images/smilies/icon_wink.gif' alt=';)' class='wp-smiley' /> </p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-186697">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-186697" title="Permalink to this comment" rel="nofollow">13</a></span>
+<span class="comment_author">Stuart</span>
+<span class="comment_time">January 28, 2012 at 2:17 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-186697">
+<p>Excellent. Thanks.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-201349">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-201349" title="Permalink to this comment" rel="nofollow">14</a></span>
+<span class="comment_author">de2x</span>
+<span class="comment_time">February 24, 2012 at 11:13 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-201349">
+<p>Can i allow host/domain google on iptables? can you tell me, please help..</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-214391">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-214391" title="Permalink to this comment" rel="nofollow">15</a></span>
+<span class="comment_author">tarani</span>
+<span class="comment_time">March 28, 2012 at 7:36 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-214391">
+<p>EXELLENT&#8230;&#8230;</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-231374">
+<span class="avatar"><a href="http://sq.cruck.org" rel="nofollow"></a></span>
+<span class="comment_num"><a href="#comment-231374" title="Permalink to this comment" rel="nofollow">16</a></span>
+<span class="comment_author"><a href='http://sq.cruck.org' rel='external nofollow' class='url'>Curtis Ruck</a></span>
+<span class="comment_time">May 8, 2012 at 2:52 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-231374">
+<p>How can you forward traffic (like 443) to a hidden server (i.e. in a DMZ) from one NIC to another?  I&#8217;ve tried setting up your rule #24, but the packets are getting logged and dropped from the FORWARD chain.</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-240458">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-240458" title="Permalink to this comment" rel="nofollow">17</a></span>
+<span class="comment_author">Max</span>
+<span class="comment_time">May 27, 2012 at 2:13 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-240458">
+<p>VERY USEFULL ARTICE&#8230;.</p>
+<p>@vierupro, I have router with busybox and have defined many rules to set network limits. plz write down a rule which is capable to limit download speed to 20 kb /s for a specif  IP.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-266987">
+<span class="avatar"><a href="http://bubhutsa.blogspot.com" rel="nofollow"></a></span>
+<span class="comment_num"><a href="#comment-266987" title="Permalink to this comment" rel="nofollow">18</a></span>
+<span class="comment_author"><a href='http://bubhutsa.blogspot.com' rel='external nofollow' class='url'>sriram r</a></span>
+<span class="comment_time">July 9, 2012 at 5:51 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-266987">
+<p>Is there a rule so I can make my outbound https sessions &#8216;sticky&#8217; using iptables? I am trying to achieve this on a dual WAN dd-wrt router (Linksys E2000)</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-290673">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-290673" title="Permalink to this comment" rel="nofollow">19</a></span>
+<span class="comment_author">Kennedy</span>
+<span class="comment_time">August 25, 2012 at 8:26 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-290673">
+<p>&#8220;Error applying iptables rules. Exit code: 11.<br />
+iptables v1.4.10<br />
+iptables: No chain/target/ match by that name.&#8221; </p>
+<p>Can any one tell what this error is and how to over come.<br />
+I have a android phone and i am tring to install a firewall in my rooted device and i am stuck with this error.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-304427">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-304427" title="Permalink to this comment" rel="nofollow">20</a></span>
+<span class="comment_author">Renato</span>
+<span class="comment_time">September 13, 2012 at 9:44 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-304427">
+<p>How do I compare two linux firewall, in terms of network security?</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-321434">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-321434" title="Permalink to this comment" rel="nofollow">21</a></span>
+<span class="comment_author">Saed</span>
+<span class="comment_time">September 28, 2012 at 10:01 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-321434">
+<p>that right Paul M &#8230;<br />
+iptables &#8211;flush<br />
+iptables &#8211;policy INPUT DROP<br />
+iptables &#8211;policy OUTPUT DROP<br />
+iptables &#8211;policy FORWARD DROP<br />
+iptables &#8211;append INPUT -i lo -j ACCEPT<br />
+iptables &#8211;append OUTPUT -o lo -j ACCEPT<br />
+iptables &#8211;append INPUT -m state &#8211;state \<br />
+ESTABLISHED,RELATED -j ACCEPT<br />
+iptables &#8211;append OUTPUT -m state &#8211;state \<br />
+NEW,ESTABLISHED,RELATED -j ACCEPT</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-522872">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-522872" title="Permalink to this comment" rel="nofollow">22</a></span>
+<span class="comment_author">aleee</span>
+<span class="comment_time">January 30, 2013 at 2:09 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-522872">
+<p>thanks&#8230;&#8230;&#8230;..</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-549656">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-549656" title="Permalink to this comment" rel="nofollow">23</a></span>
+<span class="comment_author">dp</span>
+<span class="comment_time">February 23, 2013 at 7:24 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-549656">
+<p>Hai Friends,</p>
+<p>Please let me know how to restrict the server access by using the iptables with mac addressses.</p>
+<p>I want to give permission only to 2 mac addresses and restict the remaining mac addresses to connect with the server.</p>
+<p>Thanks<br />
+dp</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-642163">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-642163" title="Permalink to this comment" rel="nofollow">24</a></span>
+<span class="comment_author">Amit Shrivastava</span>
+<span class="comment_time">April 9, 2013 at 2:51 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-642163">
+<p>Good collection&#8230;Thx</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-712190">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-712190" title="Permalink to this comment" rel="nofollow">25</a></span>
+<span class="comment_author">Sumanta</span>
+<span class="comment_time">April 25, 2013 at 1:42 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-712190">
+<p>Hi,</p>
+<p>Thanks for this great article! I have one query regarding the deletion of a rule.<br />
+I am creating a static nat rule in iptables using the command </p>
+<p>iptables -t nat -I POSTROUTING 1 -j SNAT -p ip -s 1.1.1.10/32 &#8211;to-source 2.2.2.30-2.2.2.30 -o eth2</p>
+<p>After executing the above command i am able to observe the source translation happening and also it is listed in the iptables nat list.</p>
+<p>After I remove the rule by executing the below command</p>
+<p>iptables -t nat -D POSTROUTING -j SNAT -p ip -s 1.1.1.10/32    &#8211;to-source 2.2.2.30-2.2.2.30 -o eth2</p>
+<p>The entry in the iptables nat is deleted, but i am still able to observe the source translation happening from 1.1.1.10 to 2.2.2.30.</p>
+<p>Please suggest what i need to do to delete the entry completely from the nat table or did i missed something.</p>
+<p>Thanks in advance!</p>
+<p>Regards,<br />
+Sumanta.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-802744">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-802744" title="Permalink to this comment" rel="nofollow">26</a></span>
+<span class="comment_author">Daniel</span>
+<span class="comment_time">June 10, 2013 at 12:25 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-802744">
+<p>I would offer that you may want to consider changing the order you discuss the commands.</p>
+<p>MOST things in linux require a service x restart in order to put the change into effect.</p>
+<p>Not, apparently, iptables.</p>
+<p>Telling a VPS to drop ALL traffic while you&#8217;re SSHd into it is never a good idea.</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-870857">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-870857" title="Permalink to this comment" rel="nofollow">27</a></span>
+<span class="comment_author">Br H</span>
+<span class="comment_time">August 5, 2013 at 6:36 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-870857">
+<p>Hi,<br />
+Thanks for this wonderful list.<br />
+Just with the emails &#8211; the only configuration that worked was with the following three rules:<br />
+iptables -A OUTPUT -o eth0 -p tcp &#8211;sport 25 -m state &#8211;state NEW,ESTABLISHED -j ACCEPT<br />
+iptables -A OUTPUT -o eth0 -p tcp &#8211;dport 25 -m state &#8211;state NEW,ESTABLISHED -j ACCEPT<br />
+iptables -A INPUT -i eth0 -p tcp &#8211;sport 25 -m state &#8211;state ESTABLISHED -j ACCEPT</p>
+<p>Many thanks again</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-904602">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-904602" title="Permalink to this comment" rel="nofollow">28</a></span>
+<span class="comment_author">iabc</span>
+<span class="comment_time">August 27, 2013 at 9:10 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-904602">
+<p>Here is iptables for passive ftp if anyone is interested.<br />
+&amp; Thanks for Ramesh for your wonderful blogs.</p>
+<p>iptables -A INPUT -p tcp -m tcp &#8211;dport 21 -m state &#8211;state NEW,ESTABLISHED -j ACCEPT<br />
+iptables -A OUTPUT -p tcp -m tcp &#8211;sport 21 -m state &#8211;state ESTABLISHED -j ACCEPT</p>
+<p>iptables -A INPUT -p tcp -m tcp &#8211;sport 1024:65535 &#8211;dport 1024:65535 -m state &#8211;state NEW,RELATED,ESTABLISHED -j ACCEPT<br />
+iptables -A OUTPUT -p tcp -m tcp &#8211;sport 1024:65535 &#8211;dport 1024:65535 -m state &#8211;state NEW,RELATED,ESTABLISHED -j ACCEPT</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-913105">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-913105" title="Permalink to this comment" rel="nofollow">29</a></span>
+<span class="comment_author">iTommix</span>
+<span class="comment_time">September 2, 2013 at 7:25 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-913105">
+<p>Hi,</p>
+<p>nice tutorial. I have a following question:</p>
+<p>I build a captive portal (hotspot) using iptables. from the beginning i block every port and routing to an splash page on the own apache server:</p>
+<p>iptables -t mangle -A PREROUTING -i wlan0 -p tcp -m tcp &#8211;dport 1:65535 -j internet<br />
+iptables -t nat -A PREROUTING -i wlan0 -p tcp -m mark &#8211;mark 99 -m tcp &#8211;dport 1:65535 -j DNAT &#8211;to-destination 10.0.0.254</p>
+<p>But i need an exception on a specific domain to load some css and javascript files into this splash page. How can i do this?</p>
+<p>Regards an thanks for reply in advance.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-984641">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-984641" title="Permalink to this comment" rel="nofollow">30</a></span>
+<span class="comment_author">tarvi</span>
+<span class="comment_time">October 16, 2013 at 12:29 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-984641">
+<p>What is eth0 ?</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-986082">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-986082" title="Permalink to this comment" rel="nofollow">31</a></span>
+<span class="comment_author">zug</span>
+<span class="comment_time">October 16, 2013 at 10:32 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-986082">
+<p>Very helpful and a good introduction. Thanks.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-1014406">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-1014406" title="Permalink to this comment" rel="nofollow">32</a></span>
+<span class="comment_author">saththiyan</span>
+<span class="comment_time">November 3, 2013 at 10:18 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-1014406">
+<p>hey , </p>
+<p>I have two AWS instances , Ngx and another  one call WP, WP running a as hosting server and Ngx is proxy. I need to configure WP to accept only HTTP request from Ngx. How do i do this?</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-1014418">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-1014418" title="Permalink to this comment" rel="nofollow">33</a></span>
+<span class="comment_author">saththiyan</span>
+<span class="comment_time">November 3, 2013 at 10:23 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-1014418">
+<p>Hi, </p>
+<p>I need to configure firewall ( iptable) to accept HTTP request from a server, How do i configure this?<br />
+i have two instances on AWS, instance one need to accept HTTP request from Instance two only. </p>
+<p>How do i configure ? Do i need to configure incoming and outgoing http request ?</p>
+</div>
+					</dd>
+				</dl>
+				<div id="respond">
+					<div id="respond_intro">
+						<p>Leave a Comment</p>
+					</div>
+					<form action="http://www.thegeekstuff.com/wp-comments-post.php" method="post" id="commentform">
+						<p><input class="text_input" type="text" name="author" id="author" value="" tabindex="1" /><label for="author">Name</label></p>
+						<p><input class="text_input" type="text" name="email" id="email" value="" tabindex="2" /><label for="email">E-mail</label></p>
+						<p><input class="text_input" type="text" name="url" id="url" value="" tabindex="3" /><label for="url">Website</label></p>
+						<p class="comment_box">
+							<textarea name="comment" id="comment" tabindex="4" cols="40" rows="8"></textarea>
+						</p>
+
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+						<p class="remove_bottom_margin">
+							<input name="submit" class="form_submit" type="submit" id="submit" tabindex="5" value="Submit" />
+<input type='hidden' name='comment_post_ID' value='7860' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="33b3e749b7" /></p>					</form>
+				</div>
+			</div>
+					<div class="prev_next post_nav">
+						<p class="previous">Previous post: <a href="http://www.thegeekstuff.com/2011/06/windows-sftp-scp-clients/" rel="prev">Top 7 Free SFTP or SCP Clients for Windows (Transfer Files to Linux)</a></p>
+						<p>Next post: <a href="http://www.thegeekstuff.com/2011/06/happy-3rd-birthday-to-the-geek-stuff/" rel="next">Happy 3rd Birthday to The Geek Stuff</a></p>
+					</div>
+		</div>
+
+		<div id="sidebars">
+			<div id="sidebar_1" class="sidebar">
+				<ul class="sidebar_list">
+<li class="widget widget_text" id="text-21">			<div class="textwidget"><a title="Subscribe via RSS" href="http://www.thegeekstuff.com/feed" rel="nofollow">RSS</a>&nbsp; | &nbsp;<a title="Subscribe via Email" href="http://feedburner.google.com/fb/a/mailverify?uri=TheGeekStuff&loc=en_US" rel="nofollow">Email</a>&nbsp; | &nbsp;<a title="Follow us on Twitter" href="http://twitter.com/thegeekstuff" rel="nofollow">Twitter</a>&nbsp; | &nbsp;<a title="Become a fan" href="http://www.facebook.com/thegeekstuff" rel="nofollow">Facebook</a>&nbsp; | &nbsp;<a title="Follow us on Google+" href="https://plus.google.com/112493711428194838421/posts">Google+</a>
+<br /><br />
+<form action="http://www.thegeekstuff.com/search" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="005666763606120661560:zkmegbt_djm" />
+    <input type="hidden" name="cof" value="FORID:10" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input style="background-color:#fffeee" type="text" name="q" size="40" />
+    <input style="border-color:#CCCCCC #999999 #999999 #CCCCCC; border-style:double; border-width:1px; overflow:visible;" type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load("elements", "1", {packages: "transliteration"});</script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/t13n?form=cse-search-box&t13n_langs=en"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<br /></div>
+		</li><li class="widget widget_text" id="text-3">			<div class="textwidget"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-8090601437064582";
+/* TGS Right Bar Rectangle Text Ad */
+google_ad_slot = "9054077260";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<br/></div>
+		</li><li class="widget widget_text" id="text-18"><h3>COURSE</h3>			<div class="textwidget"><ul>
+<li><a href="http://www.thegeekstuff.com/linux-sysadmin/">Linux Sysadmin CentOS 6 Course</a> - Master the Tools, Configure it Right, and be Lazy</li>
+</ul></div>
+		</li><li class="widget widget_text" id="text-4"><h3>EBOOKS</h3>			<div class="textwidget"><ul>
+<li><img title="Linux 101 Hacks Book" src="http://static.thegeekstuff.com/images/free-small.png" alt="Linux 101 Hacks Book" />&nbsp;<a href="http://www.thegeekstuff.com/linux-101-hacks-ebook/">Linux 101 Hacks 2nd Edition eBook</a> - Practical Examples to Build a Strong Foundation in Linux</li>
+<li><a href="http://www.thegeekstuff.com/bash-101-hacks-ebook/">Bash 101 Hacks eBook</a> - Take Control of Your Bash Command Line and Shell Scripting</li>
+<li><a href="http://www.thegeekstuff.com/sed-awk-101-hacks-ebook/">Sed and Awk 101 Hacks eBook</a> - Enhance Your UNIX / Linux Life with Sed and Awk</li>
+<li><a href="http://www.thegeekstuff.com/vim-101-hacks-ebook/">Vim 101 Hacks eBook</a> - Practical Examples for Becoming Fast and Productive in Vim Editor</li>
+<li><a href="http://www.thegeekstuff.com/nagios-core-ebook/">Nagios Core 3 eBook</a> - Monitor Everything, Be Proactive, and Sleep Well</li>
+</ul></div>
+		</li><li class="widget widget_text" id="text-17"><h3>POPULAR POSTS</h3>			<div class="textwidget"><ul>
+<li><a href="http://www.thegeekstuff.com/2009/01/12-amazing-and-essential-linux-books-to-enrich-your-brain-and-library/">12 Amazing and Essential Linux Books To Enrich Your Brain and Library</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/12/50-unix-linux-sysadmin-tutorials/">50 UNIX / Linux Sysadmin Tutorials</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/11/50-linux-commands/">50 Most Frequently Used UNIX / Linux Commands (With Examples)</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/gtd-getting-things-done/">How To Be Productive and Get Things Done Using GTD</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/03/30-things-to-do-when-you-are-bored-and-have-a-computer/">30 Things To Do When you are Bored and have a Computer</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/09/linux-file-system-structure/">Linux Directory Structure (File System Structure) Explained with Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/06/15-practical-crontab-examples/">Linux Crontab: 15 Awesome Cron Job Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples/">Get a Grip on the Grep! – 15 Practical Grep Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/07/linux-ls-command-examples/">Unix LS Command: 15 Practical Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/">15 Examples To Master Linux Command Line History</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/bug-tracking-system/">Top 10 Open Source Bug Tracking System</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/01/vi-and-vim-macro-tutorial-how-to-record-and-play/">Vi and Vim Macro Tutorial: How To Record and Play</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples/">Mommy, I found it! -- 15 Practical Linux Find Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/07/best-gmail-tips-and-tricks/">15 Awesome Gmail Tips and Tricks</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/06/expertise-in-google-search/">15 Awesome Google Search Tips and Tricks</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/raid-levels-tutorial/">RAID 0, RAID 1, RAID 5, RAID 10 Explained with Diagrams</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/01/15-practical-unix-linux-top-command-examples/">Can You Top This? 15 Practical Linux Top Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/09/top-5-best-network-monitoring-tools/">Top 5 Best System Monitoring Tools</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/06/top-5-best-linux-os-distributions/">Top 5 Best Linux OS Distributions</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/06/how-to-monitor-remote-linux-host-using-nagios-30/">How To Monitor Remote Linux Host using Nagios 3.0</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/01/awk-introduction-tutorial-7-awk-print-examples/">Awk Introduction Tutorial – 7 Awk Print Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/09/rsync-command-examples/">How to Backup Linux? 15 rsync Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/09/the-ultimate-wget-download-guide-with-15-awesome-examples/">The Ultimate Wget Download Guide With 15 Awesome Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/07/top-5-best-linux-text-editors/">Top 5 Best Linux Text Editors</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/tcpdump-command-examples/">Packet Analyzer: 15 TCPDUMP Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/06/bash-array-tutorial/">The Ultimate Bash Array Tutorial with 15 Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/11/3-steps-to-perform-ssh-login-without-password-using-ssh-keygen-ssh-copy-id/">3 Steps to Perform SSH Login Without Password Using ssh-keygen & ssh-copy-id</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/10/unix-sed-tutorial-advanced-sed-substitution-examples/">Unix Sed Tutorial: Advanced Sed Substitution Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/03/netstat-command-examples/">UNIX / Linux: 10 Netstat Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/06/the-ultimate-guide-for-creating-strong-passwords/">The Ultimate Guide for Creating Strong Passwords</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/6-steps-to-secure-your-home-wireless-network/">6 Steps to Secure Your Home Wireless Network</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/turbocharge-putty-with-12-powerful-add-ons-software-for-geeks-3/">Turbocharge PuTTY with 12 Powerful Add-Ons</a></li>
+</ul></div>
+		</li><li class="widget widget_text" id="text-19"><h3>CATEGORIES</h3>			<div class="textwidget"><ul>
+<li><a rel="nofollow" href="/category/linux/">Linux Tutorials</a></li>
+<li><a rel="nofollow" href="/category/vim-2/">Vim Editor</a></li>
+<li><a rel="nofollow" href="/category/sed/">Sed Scripting</a></li>
+<li><a rel="nofollow" href="/category/awk/">Awk Scripting</a></li>
+<li><a rel="nofollow" href="/category/bash-2/">Bash Shell Scripting</a></li>
+<li><a rel="nofollow" href="/category/nagios-2/">Nagios Monitoring</a></li>
+<li><a rel="nofollow" href="/category/openssh-2/">OpenSSH</a></li>
+<li><a rel="nofollow" href="/category/iptables/">IPTables Firewall</a></li>
+<li><a rel="nofollow" href="/category/apache/">Apache Web Server</a></li>
+<li><a rel="nofollow" href="/category/mysql/">MySQL Database</a></li>
+<li><a rel="nofollow" href="/category/perl/">Perl Programming</a></li>
+<li><a rel="nofollow" href="/category/google/">Google Tutorials</a></li>
+<li><a rel="nofollow" href="/category/ubuntu/">Ubuntu Tutorials</a></li>
+<li><a rel="nofollow" href="/category/postgresql/">PostgreSQL DB</a></li>
+<li><a rel="nofollow" href="/category/hello-world/">Hello World Examples</a></li>
+<li><a rel="nofollow" href="/category/c-programming/">C Programming</a></li>
+<li><a rel="nofollow" href="/category/c-plus-plus/">C++ Programming</a></li>
+<li><a rel="nofollow" href="/category/dell-2/">DELL Server Tutorials</a></li>
+<li><a rel="nofollow" href="/category/oracle/">Oracle Database</a></li>
+<li><a rel="nofollow" href="/category/vmware/">VMware Tutorials</a></li>
+</ul></div>
+		</li><li class="widget widget_text" id="text-20">			<div class="textwidget"><g:person href="https://plus.google.com/112493711428194838421" data-rel="author" layout="landscape"></g:person></div>
+		</li>				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+<div class="col_footer1">
+	<ul class="sidebar_list">
+<li id="text-7" class="widget widget_text"><h3>About The Geek Stuff</h3>			<div class="textwidget"><br />
+<img class="float" title="Ramesh Natarajan" src="http://static.thegeekstuff.com/images/ramesh-small.gif" alt="Linux 101 Hacks Book" />
+My name is <strong>Ramesh Natarajan</strong>. I will be posting instruction guides, how-to, troubleshooting tips and tricks on Linux, database, hardware, security and web. My focus is to write articles that will either teach you or help you resolve a problem. Read more about <a href="http://www.thegeekstuff.com/about/">Ramesh Natarajan</a> and the blog.</div>
+		</li>
+<li id="text-8" class="widget widget_text"><h3>Support Us</h3>			<div class="textwidget"><br />
+Support this blog by purchasing one of my ebooks.
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/bash-101-hacks-ebook/">Bash 101 Hacks eBook</a>
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/sed-awk-101-hacks-ebook/">Sed and Awk 101 Hacks eBook</a>
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/vim-101-hacks-ebook/">Vim 101 Hacks eBook</a>
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/nagios-core-ebook/">Nagios Core 3 eBook</a></div>
+		</li>
+<li id="text-9" class="widget widget_text"><h3>Contact Us</h3>			<div class="textwidget"><br />
+<strong>Email Me :</strong>
+Use this <a href="http://www.thegeekstuff.com/contact" rel="nofollow">Contact Form</a> to get in touch me with your comments, questions or suggestions about this site. You can also simply drop me a line to say hello!.
+<br /><br />
+<a title="Follow us on Google+" href="https://plus.google.com/112493711428194838421/posts">Follow us on Google+</a>
+<br /><br />
+<a title="Follow us on Twitter" href="http://twitter.com/thegeekstuff" rel="nofollow">Follow us on Twitter</a>
+<br /><br />
+<a href="
+http://www.facebook.com/thegeekstuff" rel="nofollow">Become a fan on Facebook</a>&nbsp;&nbsp;</div>
+		</li>
+	</ul>
+</div>
+
+<div class="cb"></div>
+	<p>Copyright &copy; 2008&ndash;2014 Ramesh Natarajan. All rights reserved  | 
+<a href="http://www.thegeekstuff.com/copyright">Terms of Service</a> </p>	</div>
+</div>
+</div>
+<!--[if lte IE 8]>
+<div id="ie_clear"></div>
+<![endif]-->
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5302569-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+Content Delivery Network via Amazon Web Services: CloudFront: static.thegeekstuff.com
+
+ Served from: www.thegeekstuff.com @ 2014-02-02 03:18:44 by W3 Total Cache -->

@@ -1,0 +1,21 @@
+Add one more HDD to system and try these.
+
+
+VBoxManage internalcommands converttoraw your-virtualbox-disk.vdi /dev/sdX
+
+or
+
+trying out 1st solution:
+
+1. convert VDI to RAW
+Code:
+
+VBoxManage clonehd -format RAW <filename>.vdi <filename>.raw
+
+2. use dd to copy raw to physical (unmounted) drive
+Code:
+
+$ dd if=/image.raw of=/dev/hda
+
+3. force check disk on first startup
+

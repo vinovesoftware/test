@@ -1,0 +1,1056 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Linux Firewall Tutorial: IPTables Tables, Chains, Rules Fundamentals</title>
+<meta name="robots" content="noodp, noydir" />
+<link rel="stylesheet" href="http://static.thegeekstuff.com/wp-content/themes/thesis_18/style.css?122710-193800" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="http://static.thegeekstuff.com/wp-content/themes/thesis_18/custom/layout.css?042412-45116" type="text/css" media="screen, projection" />
+<!--[if lte IE 8]><link rel="stylesheet" href="http://static.thegeekstuff.com/wp-content/themes/thesis_18/lib/css/ie.css?122710-193752" type="text/css" media="screen, projection" /><![endif]-->
+<link rel="stylesheet" href="http://static.thegeekstuff.com/wp-content/themes/thesis_18/custom/custom.css?040613-214220" type="text/css" media="screen, projection" />
+<link rel="canonical" href="http://www.thegeekstuff.com/2011/01/iptables-fundamentals/" />
+<link rel="alternate" type="application/rss+xml" title="The Geek Stuff RSS Feed" href="http://feedproxy.google.com/TheGeekStuff" />
+<link rel="pingback" href="http://www.thegeekstuff.com/xmlrpc.php" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.thegeekstuff.com/xmlrpc.php?rsd" />
+<link href="http://static.thegeekstuff.com/favicon.ico" rel="icon" type="image/x-icon" />
+<link rel="author" href="https://plus.google.com/112493711428194838421/posts"/>
+<link rel="alternate" type="application/rss+xml" title="The Geek Stuff &raquo; Linux Firewall Tutorial: IPTables Tables, Chains, Rules Fundamentals Comments Feed" href="http://www.thegeekstuff.com/2011/01/iptables-fundamentals/feed/" />
+
+<!-- All in One SEO Pack 2.1 by Michael Torbert of Semper Fi Web Design[277,352] -->
+<meta name="description" content="iptables firewall is used to manage packet filtering and NAT rules. IPTables comes with all Linux distributions. Understanding how to setup and configure" />
+
+<link rel="canonical" href="http://www.thegeekstuff.com/2011/01/iptables-fundamentals/" />
+<!-- /all in one seo pack -->
+</head>
+<body class="custom">
+<div id="container">
+<div id="page">
+	<div id="header">
+<p id="logo"><a href="http://www.thegeekstuff.com"><img src="http://static.thegeekstuff.com/wp-content/themes/thesis_18/custom/images/thegeekstuff.gif" alt="The Geek Stuff" /></a></p><div id="header_ad"><div id="header_ad1">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8090601437064582";
+/* TGS Logo Header Big Image Only */
+google_ad_slot = "4708993701";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div></div>
+	</div>
+<ul class="menu">
+<li class="tab tab-home"><a href="http://www.thegeekstuff.com">Home</a></li>
+<li class="tab tab-1"><a href="http://www.thegeekstuff.com/linux-101-hacks-ebook/" title="Linux 101 Hacks eBook, by Ramesh Natarajan">Free eBook</a></li>
+<li class="tab tab-2"><a href="http://www.thegeekstuff.com/best-of-the-blog/" title="">Start Here</a></li>
+<li class="tab tab-3"><a href="http://www.thegeekstuff.com/contact/" title="Contact">Contact</a></li>
+<li class="tab tab-4"><a href="http://www.thegeekstuff.com/about/" title="">About</a></li>
+</ul>
+	<div id="content_box">
+		<div id="content" class="hfeed">
+
+			<div class="post-7088 post type-post status-publish format-standard hentry category-iptables category-linux tag-iptables-tutorials tag-ubuntu-iptables-firewall tag-unix-iptables post_box top" id="post-7088">
+				<div class="headline_area">
+					<h1 class="entry-title">Linux Firewall Tutorial: IPTables Tables, Chains, Rules Fundamentals</h1>
+					<p class="headline_meta">by <span class="author vcard fn">Ramesh Natarajan</span> on <abbr class="published" title="2011-01-24">January 24, 2011</abbr></p>
+				</div>
+				<div class="format_text entry-content">
+<div style="margin:7px 0px 6px 0px; padding:5px;"> 
+
+<div style="float:left; width=95px">
+<g:plusone size="medium"></g:plusone>
+</div>
+
+<div style="float:left; padding:2px; width:90px"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.thegeekstuff.com%2F2011%2F01%2Fiptables-fundamentals%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe></iframe>
+</div>
+
+<div style="width=95px">
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+</div>
+
+</div>
+<p>iptables firewall is used to manage packet filtering and NAT rules. IPTables comes with all Linux distributions. Understanding how to setup and configure iptables will help you manage your Linux firewall effectively.</p>
+<p>iptables tool is used to manage the Linux firewall rules. At a first look, iptables might look complex (or even confusing). But, once you understand the basics of how iptables work and how it is structured, reading and writing iptables firewall rules will be easy.</p>
+<p>This article is part of an ongoing iptables tutorial series. This is the 1st article in that series. </p>
+<p>This article explains how iptables is structured, and explains the fundamentals about iptables tables, chains and rules.</p>
+<p><span id="more-7088"></span></p>
+<p>On a high-level iptables might contain multiple tables. Tables might contain multiple chains. Chains can be built-in or user-defined. Chains might contain multiple rules. Rules are defined for the packets.</p>
+<p>So, the structure is: iptables -&gt; Tables -&gt; Chains -&gt; Rules. This is defined in the following diagram.</p>
+    <center>
+      <div style="margin-left:2px; margin-top:10px; margin-bottom:10px; ">
+
+        <!-- AD BLOCK -->
+		
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8090601437064582";
+/* TGS SinglePost Bottom Medium Rect */
+google_ad_slot = "8643685131";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+        <!-- END AD BLOCK -->
+
+	  </div>
+    </center>
+
+
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-7096" title="IPTables Tables Chains and Rules" src="http://static.thegeekstuff.com/wp-content/uploads/2011/01/iptables-table-chain-rule-structure.png" alt="" width="540" height="400" /><br />
+<strong> Fig</strong>: IPTables Table, Chain, and Rule Structure</p>
+<p>Just to re-iterate, tables are bunch of chains, and chains are bunch of firewall rules.</p>
+<h2>I. IPTABLES TABLES and CHAINS</h2>
+<p>IPTables has the following 4 built-in tables.</p>
+<h3>1. Filter Table</h3>
+<p>Filter is default table for iptables. So, if you don&#8217;t define you own table, you&#8217;ll be using filter table. Iptables&#8217;s filter table has the following built-in chains.</p>
+<ul>
+<li>INPUT chain &#8211; Incoming to firewall. For packets coming to the local server.</li>
+<li>OUTPUT chain &#8211; Outgoing from firewall. For packets generated locally and going out of the local server.</li>
+<li>FORWARD chain &#8211; Packet for another NIC on the local server. For packets routed through the local server.</li>
+</ul>
+<h3>2. NAT table</h3>
+<p>Iptable&#8217;s NAT table has the following built-in chains.</p>
+<ul>
+<li>PREROUTING chain &#8211; Alters packets before routing. i.e Packet translation happens immediately after the packet comes to the system (and before routing). This helps to translate the destination ip address of the packets to something that matches the routing on the local server. This is used for DNAT (destination NAT).</li>
+<li>POSTROUTING chain &#8211; Alters packets after routing. i.e Packet translation happens when the packets are leaving the system. This helps to translate the source ip address of the packets to something that might match the routing on the desintation server. This is used for SNAT (source NAT).</li>
+<li>OUTPUT chain &#8211; NAT for locally generated packets on the firewall.</li>
+</ul>
+<h3>3. Mangle table</h3>
+<p>Iptables&#8217;s Mangle table is for specialized packet alteration. This alters QOS bits in the TCP header. Mangle table has the following built-in chains.</p>
+<ul>
+<li>PREROUTING chain</li>
+<li>OUTPUT chain</li>
+<li>FORWARD chain</li>
+<li>INPUT chain</li>
+<li>POSTROUTING chain</li>
+</ul>
+<h3>4. Raw table</h3>
+<p>Iptable&#8217;s Raw table is for configuration excemptions.  Raw table has the following built-in chains.</p>
+<ul>
+<li>PREROUTING chain</li>
+<li>OUTPUT chain</li>
+</ul>
+<p>The following diagram shows the three important tables in iptables.</p>
+<p><img class="aligncenter size-full wp-image-7100" title="IPTables Filter NAT Mangle Tables" src="http://static.thegeekstuff.com/wp-content/uploads/2011/01/iptables-filter-nat-mangle-tables.png" alt="" width="540" height="279" /></p>
+<p style="text-align: center;"><strong> Fig</strong>: IPTables built-in tables</p>
+<h2>II. IPTABLES RULES</h2>
+<p>Following are the key points to remember for the iptables rules.</p>
+<ul>
+<li>Rules contain a criteria and a target.</li>
+<li>If the criteria is matched, it goes to the rules specified in the target (or) executes the special values mentioned in the target.</li>
+<li>If the criteria is not matached, it moves on to the next rule.</li>
+</ul>
+<h3>Target Values</h3>
+<p>Following are the possible special values that you can specify in the target.</p>
+<ul>
+<li>ACCEPT &#8211; Firewall will accept the packet.</li>
+<li>DROP &#8211; Firewall will drop the packet.</li>
+<li>QUEUE &#8211; Firewall will pass the packet to the userspace.</li>
+<li>RETURN &#8211; Firewall will stop executing the next set of rules in the current chain for this packet. The control will be returned to the calling chain.</li>
+</ul>
+<p>If you do iptables &#8211;list (or) service iptables status, you&#8217;ll see all the available firewall rules on your system. The following iptable example shows that there are no firewall rules defined on this system. As you see, it displays the default input table, with the default input chain, forward chain, and output chain.</p>
+<pre># iptables -t filter --list
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination</pre>
+<p>Do the following to view the mangle table.</p>
+<pre># iptables -t mangle --list</pre>
+<p>Do the following to view the nat table.</p>
+<pre># iptables -t nat --list</pre>
+<p>Do the following to view the raw table.</p>
+<pre># iptables -t raw --list</pre>
+<p>Note: If you don&#8217;t specify the -t option, it will display the default filter table. So, both of the following commands are the same.</p>
+<pre># iptables -t filter --list
+(or)
+# iptables --list</pre>
+<p>The following iptable example shows that there are some rules defined in the input, forward, and output chain of the filter table.</p>
+<pre># iptables --list
+Chain INPUT (policy ACCEPT)
+num  target     prot opt source               destination
+1    RH-Firewall-1-INPUT  all  --  0.0.0.0/0            0.0.0.0/0
+
+Chain FORWARD (policy ACCEPT)
+num  target     prot opt source               destination
+1    RH-Firewall-1-INPUT  all  --  0.0.0.0/0            0.0.0.0/0
+
+Chain OUTPUT (policy ACCEPT)
+num  target     prot opt source               destination
+
+Chain RH-Firewall-1-INPUT (2 references)
+num  target     prot opt source               destination
+1    ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0
+2    ACCEPT     icmp --  0.0.0.0/0            0.0.0.0/0           icmp type 255
+3    ACCEPT     esp  --  0.0.0.0/0            0.0.0.0/0
+4    ACCEPT     ah   --  0.0.0.0/0            0.0.0.0/0
+5    ACCEPT     udp  --  0.0.0.0/0            224.0.0.251         udp dpt:5353
+6    ACCEPT     udp  --  0.0.0.0/0            0.0.0.0/0           udp dpt:631
+7    ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0           tcp dpt:631
+8    ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0           state RELATED,ESTABLISHED
+9    ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:22
+10   REJECT     all  --  0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited</pre>
+<p>The rules in the iptables &#8211;list command output contains the following fields:</p>
+<ul>
+<li>num &#8211; Rule number within the particular chain</li>
+<li>target &#8211; Special target variable that we discussed above</li>
+<li>prot &#8211; Protocols. tcp, udp, icmp, etc.,</li>
+<li>opt &#8211; Special options for that specific rule.</li>
+<li>source &#8211; Source ip-address of the packet</li>
+<li>destination &#8211; Destination ip-address for the packet</li>
+</ul>
+<div style="margin:7px 0px 3px 0px; padding:5px; background:#F2F0E8">
+
+<div style="float:left; width=95px">
+<g:plusone size="medium"></g:plusone>
+</div>
+
+<div style="float:left; width=95px">
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+</div>
+
+<div style="float:left; padding:2px; width:90px"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.thegeekstuff.com%2F2011%2F01%2Fiptables-fundamentals%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe></iframe>
+</div>
+
+<div style="padding:1px">
+&gt;&nbsp;<a href="#respond">Add your comment</a> 
+</div>
+
+</div>
+<br/>
+<div id="subscribebox">
+<a rel="nofollow" href="http://www.thegeekstuff.com/linux-sysadmin"><img class="alignright" title="Linux Sysadmin Course" src="http://static.thegeekstuff.com/images/linux-sysadmin-200-166.png" alt="Linux Sysadmin Course" /></a>
+Linux provides several powerful administrative tools and utilities which will help you to manage your systems effectively. If you don’t know what these tools are and how to use them, you could be spending lot of time trying to perform even the basic administrative tasks. The focus of this course is to help you understand system administration tools, which will help you to become an effective Linux system administrator.<br/> Get the <a href="http://www.thegeekstuff.com/linux-sysadmin" class="button">Linux Sysadmin Course</a> Now!
+</div>
+<h3>If you enjoyed this article, you might also like..</h3>
+<table>
+<tr>
+<td valign="top">
+<ol>
+<li><a href="http://www.thegeekstuff.com/2010/12/50-unix-linux-sysadmin-tutorials/">50 Linux Sysadmin Tutorials</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/11/50-linux-commands/">50 Most Frequently Used Linux Commands (With Examples)</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/12/linux-performance-monitoring-tools/">Top 25 Best Linux Performance Monitoring and Debugging Tools</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples/">Mommy, I found it! – 15 Practical Linux Find Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/linux-101-hacks-ebook/">Linux 101 Hacks 2nd Edition eBook</a>&nbsp;<img title="Linux 101 Hacks Book" src="http://static.thegeekstuff.com/images/free-small.png" alt="Linux 101 Hacks Book" /></li>
+</ol>
+</td>
+<td>
+<ul>
+<li><a href="http://www.thegeekstuff.com/2010/01/awk-introduction-tutorial-7-awk-print-examples/">Awk Introduction – 7 Awk Print Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/10/unix-sed-tutorial-advanced-sed-substitution-examples/">Advanced Sed Substitution Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/8-essential-vim-editor-navigation-fundamentals/">8 Essential Vim Editor Navigation Fundamentals</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/06/iptables-rules-examples/">25 Most Frequently Used Linux IPTables Rules Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/turbocharge-putty-with-12-powerful-add-ons-software-for-geeks-3/">Turbocharge PuTTY with 12 Powerful Add-Ons</a></li>
+</ul>
+</td>
+</tr>
+</table>
+<br />
+<center> 
+<table border=0 cellspacing="10"> 
+<tr> 
+<td> 
+<a rel="nofollow" href="http://www.thegeekstuff.com/bash-101-hacks-ebook/"><img title="Bash 101 Hacks Book" src="http://static.thegeekstuff.com/images/bash-132.png" alt="Bash 101 Hacks Book" /></a> 
+</td> 
+<td> 
+<a rel="nofollow" href="http://www.thegeekstuff.com/sed-awk-101-hacks-ebook/"><img title="Sed and Awk 101 Hacks Book" src="http://static.thegeekstuff.com/images/sed-and-awk-132.png" alt="Sed and Awk 101 Hacks Book" /></a> 
+</td> 
+<td> 
+<a rel="nofollow" href="http://www.thegeekstuff.com/nagios-core-ebook/"><img title="Nagios Core 3 Book" src="http://static.thegeekstuff.com/images/nagios-core-132.png" alt="Nagios Core 3 Book" /></a> 
+</td> 
+<td> 
+<a rel="nofollow" href="http://www.thegeekstuff.com/vim-101-hacks-ebook/"><img title="Vim 101 Hacks Book" src="http://static.thegeekstuff.com/images/vim-101-hacks-132.png" alt="Vim 101 Hacks Book" /></a> 
+</td> 
+</tr> 
+</table> 
+</center>
+<br />
+<div id="tgs-tags">
+Tags: <a href="http://www.thegeekstuff.com/tag/iptables-tutorials/" rel="tag">IPTables Tutorials</a>, <a href="http://www.thegeekstuff.com/tag/ubuntu-iptables-firewall/" rel="tag">Ubuntu IPTables Firewall</a>, <a href="http://www.thegeekstuff.com/tag/unix-iptables/" rel="tag">UNIX IPTables</a></div>
+				</div>
+			</div>
+
+			<div id="comments">
+				<div id="comments_intro" class="comments_intro">
+					<p><span class="bracket">{</span> <span>45</span> comments&#8230; read them below or <a href="#respond" rel="nofollow">add one</a> <span class="bracket">}</span></p>
+				</div>
+
+				<dl id="comment_list">
+					<dt class="comment even thread-even depth-1" id="comment-80844">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-80844" title="Permalink to this comment" rel="nofollow">1</a></span>
+<span class="comment_author">Pushpraj</span>
+<span class="comment_time">January 24, 2011 at 12:56 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-80844">
+<p>very good&#8230;.keep writing&#8230;&#8230;</p>
+<p>Thanks<br />
+Pushpraj</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-80865">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-80865" title="Permalink to this comment" rel="nofollow">2</a></span>
+<span class="comment_author">pupu</span>
+<span class="comment_time">January 24, 2011 at 3:22 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-80865">
+<p>Just note that DNAT and SNAT also stands for Dynamic and Static NAT, so don&#8217;t be confused when you read another text. Anyway, nice article, thanks!</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-80866">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-80866" title="Permalink to this comment" rel="nofollow">3</a></span>
+<span class="comment_author">Rendy</span>
+<span class="comment_time">January 24, 2011 at 3:22 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-80866">
+<p>Thank You Ramesh&#8230;very clear!</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-80874">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-80874" title="Permalink to this comment" rel="nofollow">4</a></span>
+<span class="comment_author">vaisakh</span>
+<span class="comment_time">January 24, 2011 at 3:59 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-80874">
+<p>Excellent .. I was searching for a good article about the fundamentals of IPtable.. Thanks. Also waiting for next part</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-80915">
+<span class="avatar"><a href="http://blog.yeleek.co.uk" rel="nofollow"></a></span>
+<span class="comment_num"><a href="#comment-80915" title="Permalink to this comment" rel="nofollow">5</a></span>
+<span class="comment_author"><a href='http://blog.yeleek.co.uk' rel='external nofollow' class='url'>Ben</a></span>
+<span class="comment_time">January 24, 2011 at 9:42 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-80915">
+<p>Nice article, look forward to rest of the series.  Any idea when others will be out?</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-80920">
+<span class="avatar"><a href="http://aec2.dawsoncollege.qc.ca" rel="nofollow"></a></span>
+<span class="comment_num"><a href="#comment-80920" title="Permalink to this comment" rel="nofollow">6</a></span>
+<span class="comment_author"><a href='http://aec2.dawsoncollege.qc.ca' rel='external nofollow' class='url'>p campbell</a></span>
+<span class="comment_time">January 24, 2011 at 10:07 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-80920">
+<p>Some of your articles are excellent for beginners but this is not a tutorial it is misnamed.</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-80929">
+<span class="avatar"><a href="http://walyonaire.wordpress.com" rel="nofollow"></a></span>
+<span class="comment_num"><a href="#comment-80929" title="Permalink to this comment" rel="nofollow">7</a></span>
+<span class="comment_author"><a href='http://walyonaire.wordpress.com' rel='external nofollow' class='url'>Waly DIOUF</a></span>
+<span class="comment_time">January 24, 2011 at 11:06 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-80929">
+<p>This website is sooooo what I just need at work. Good work Ramesh, you&#8217;re a genuis.<br />
+Thanks a lot</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-80956">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-80956" title="Permalink to this comment" rel="nofollow">8</a></span>
+<span class="comment_author">shakerlxxv</span>
+<span class="comment_time">January 24, 2011 at 12:49 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-80956">
+<p>Great topic. Looking forward to the rest of the series.</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-80963">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-80963" title="Permalink to this comment" rel="nofollow">9</a></span>
+<span class="comment_author">R</span>
+<span class="comment_time">January 24, 2011 at 1:36 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-80963">
+<p>Ramesh,<br />
+You might want to include tutorial on fwbuilder, its a nice gui interface and used to manage firewall on 100&#8242;s of hosts.<br />
+-R</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-81096">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-81096" title="Permalink to this comment" rel="nofollow">10</a></span>
+<span class="comment_author">shaheem</span>
+<span class="comment_time">January 25, 2011 at 1:21 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-81096">
+<p>great stuff. also waiting for the follow up!</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-81217">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-81217" title="Permalink to this comment" rel="nofollow">11</a></span>
+<span class="comment_author">artie</span>
+<span class="comment_time">January 25, 2011 at 2:12 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-81217">
+<p>great read and informative. look forward to the follow up.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-81847">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-81847" title="Permalink to this comment" rel="nofollow">12</a></span>
+<span class="comment_author">shezars</span>
+<span class="comment_time">January 28, 2011 at 2:28 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-81847">
+<p>very helpfullllllll,,,<br />
+wait, for your next part.</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-82890">
+<span class="avatar"><a href="http://www.libranetsolutions.com" rel="nofollow"></a></span>
+<span class="comment_num"><a href="#comment-82890" title="Permalink to this comment" rel="nofollow">13</a></span>
+<span class="comment_author"><a href='http://www.libranetsolutions.com' rel='external nofollow' class='url'>Will Knight</a></span>
+<span class="comment_time">January 31, 2011 at 10:07 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-82890">
+<p>Good tutorial, I find iptables complex to understand but you have made it so easy, Thanks.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-83762">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-83762" title="Permalink to this comment" rel="nofollow">14</a></span>
+<span class="comment_author">abc</span>
+<span class="comment_time">February 4, 2011 at 1:51 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-83762">
+<p>Very Nice tutorial. Thanks</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-85334">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-85334" title="Permalink to this comment" rel="nofollow">15</a></span>
+<span class="comment_author">saran</span>
+<span class="comment_time">February 10, 2011 at 10:00 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-85334">
+<p>great starter to the series<br />
+plz continue with the tutorial</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-87023">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-87023" title="Permalink to this comment" rel="nofollow">16</a></span>
+<span class="comment_author">abdul jamal</span>
+<span class="comment_time">February 18, 2011 at 9:37 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-87023">
+<p>Nice job.I read it and got the concept where is confused.. i have some question and answers ,,u will help me out to be correct.</p>
+<p>Q1:  Rule the matches ssh traffic(tcp,22) arriving through interface eth0.<br />
+ans.  iptables -A INPUT -i eth0 -p tcp &#8211;dport 22<br />
+      OR<br />
+       iptables -A INPUT -i eth0 -p tcp &#8211;sport 22<br />
+Q2: Rule that matches traffic to a DNS server  (udp,53) from any address in the range 10.0.0.0-10.0.0.255<br />
+Ans:  iptable -A INPUT -m iprange &#8211;src-range  10.0.0.0-10.0.0.255   -d 10.19.6.142 (dns server) -p udp &#8211;dport 53</p>
+<p>Q3:Rule that matches traffic from any address in the range 10.0.0.1 to 10.0.0.6,inclusive.<br />
+Ans. iptable -A INPUT -m iprange &#8211;src-range  10.0.0.1-10.0.0.6 </p>
+<p>Q4: Three rules that accept traffic from address 10.0.0.1 through 10.0.0.6, but drops traffic from 10.0.0.0 and 10.0.0.7 , without using any extension matches.<br />
+Ans:    iptable -A INPUT -s 10.0.0.0 -j DROP<br />
+           iptable -A INPUT -s 10.0.0.7 -j DROP<br />
+            iptable -A INPUT  -m iprange &#8211;src-range  10.0.0.1-10.0.0.6 -j  ACCEPT</p>
+<p>thanks for the correct and replying</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-116597">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-116597" title="Permalink to this comment" rel="nofollow">17</a></span>
+<span class="comment_author">Ishara Fernando</span>
+<span class="comment_time">July 8, 2011 at 12:38 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-116597">
+<p>Now only I understand the firewall concepts and the Iptable rules&#8230;<br />
+Each and every technique of explaining the theories are brilliant Mr.Ramesh&#8230; Keep it up.. We all Are with YOU&#8230;</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-122290">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-122290" title="Permalink to this comment" rel="nofollow">18</a></span>
+<span class="comment_author">OKELLO</span>
+<span class="comment_time">August 16, 2011 at 2:39 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-122290">
+<p>l think am beginning to understand the iptables, thanks man</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-136091">
+<span class="avatar"><a href="http://www.freemao.info" rel="nofollow"></a></span>
+<span class="comment_num"><a href="#comment-136091" title="Permalink to this comment" rel="nofollow">19</a></span>
+<span class="comment_author"><a href='http://www.freemao.info' rel='external nofollow' class='url'>freemao</a></span>
+<span class="comment_time">October 31, 2011 at 5:47 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-136091">
+<p>how to define the rules&#8217; prior then?</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-140763">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-140763" title="Permalink to this comment" rel="nofollow">20</a></span>
+<span class="comment_author">Rob</span>
+<span class="comment_time">November 15, 2011 at 3:09 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-140763">
+<p>Ramesh,</p>
+<p>Very good article.  Thanks.  Has anyone considered the pros/cons to utilizing and maintaining their own open source firewall vs. paying for the service (ie. Verizon, AT&amp;T, other)?  How much time is associated to maintaining/supporting an open source solution?  I&#8217;m trying to justify the idea of going away from a service based concept (appliance, maintenance/support are provided) vs. pulling in my own skilled resources to build/maintain an open source solution as discussed above.</p>
+<p>Thanks,</p>
+<p>Rob</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-170965">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-170965" title="Permalink to this comment" rel="nofollow">21</a></span>
+<span class="comment_author">Stan</span>
+<span class="comment_time">January 3, 2012 at 4:36 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-170965">
+<p>you said: &#8220;Iptables’s Mangle table is for specialized packet alteration. This alters QOS bits in the TCP header. &#8221;</p>
+<p>Alters QOS bits in TCP header? I thought mangle altering TOS bits in IP header! TCP operate on higher level than IP, and mangle works with IP packets.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-212659">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-212659" title="Permalink to this comment" rel="nofollow">22</a></span>
+<span class="comment_author">ramadan</span>
+<span class="comment_time">March 24, 2012 at 7:45 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-212659">
+<p>it&#8217;s very nice thanks for your posting .keep writing about iptables</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-219979">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-219979" title="Permalink to this comment" rel="nofollow">23</a></span>
+<span class="comment_author">sarah</span>
+<span class="comment_time">April 9, 2012 at 2:44 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-219979">
+<p>it was really good,thank u so much,plz keep writing&#8230;</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-223960">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-223960" title="Permalink to this comment" rel="nofollow">24</a></span>
+<span class="comment_author">Rahul</span>
+<span class="comment_time">April 17, 2012 at 10:32 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-223960">
+<p>Thanks, nice and clear</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-247108">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-247108" title="Permalink to this comment" rel="nofollow">25</a></span>
+<span class="comment_author">Rakesh Sindhu</span>
+<span class="comment_time">June 7, 2012 at 3:40 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-247108">
+<p>Really good and very clear &#8230;.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-255158">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-255158" title="Permalink to this comment" rel="nofollow">26</a></span>
+<span class="comment_author">Amol</span>
+<span class="comment_time">June 19, 2012 at 1:21 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-255158">
+<p>Nice post.Very helpful for beginners.</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-274230">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-274230" title="Permalink to this comment" rel="nofollow">27</a></span>
+<span class="comment_author">mucivane</span>
+<span class="comment_time">July 23, 2012 at 7:44 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-274230">
+<p>looking for a rule that allows traffic comming from an external user through the internet to access FTP (192.168.0.252), SSH&amp; web (192.168.0.253) servers and some workstation on the same network. The router of that network is 192.168.254</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-278912">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-278912" title="Permalink to this comment" rel="nofollow">28</a></span>
+<span class="comment_author">LJ</span>
+<span class="comment_time">July 31, 2012 at 12:51 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-278912">
+<p>Extraordinary introduction, Ramesh</p>
+<p>You&#8217;ve the knowledge and astonishing skills to communicate it, an unusual combination</p>
+<p>Congratulations!<br />
+LJ</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-282844">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-282844" title="Permalink to this comment" rel="nofollow">29</a></span>
+<span class="comment_author">Aman</span>
+<span class="comment_time">August 9, 2012 at 12:30 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-282844">
+<p>Super..</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-296132">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-296132" title="Permalink to this comment" rel="nofollow">30</a></span>
+<span class="comment_author">Bilo</span>
+<span class="comment_time">September 5, 2012 at 12:03 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-296132">
+<p>Thanks for the article. Now I really understand how this stuff work. Awesome</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-366042">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-366042" title="Permalink to this comment" rel="nofollow">31</a></span>
+<span class="comment_author">Conrad</span>
+<span class="comment_time">November 5, 2012 at 12:20 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-366042">
+<p>Thank you very much for your excellent tutorial.  Looking forward to the next one.<br />
+Regards to you !</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-700589">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-700589" title="Permalink to this comment" rel="nofollow">32</a></span>
+<span class="comment_author">qh</span>
+<span class="comment_time">April 23, 2013 at 12:43 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-700589">
+<p>thanks for your so popular article.</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-701212">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-701212" title="Permalink to this comment" rel="nofollow">33</a></span>
+<span class="comment_author">madfrog</span>
+<span class="comment_time">April 23, 2013 at 3:00 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-701212">
+<p>Thanks a lot. It really has been benificial in clearing out some concepts. By coincidence i came over to the 2nd article first and landed up over here otherwise would have been difficult.<br />
+Is there any directory structure where one can have overview of the topics. That would be helpful as well. (The reason being that your explanations are really from grass root level)<br />
+Regards</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-715804">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-715804" title="Permalink to this comment" rel="nofollow">34</a></span>
+<span class="comment_author">fastthinker</span>
+<span class="comment_time">April 26, 2013 at 12:21 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-715804">
+<p>great article</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-735027">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-735027" title="Permalink to this comment" rel="nofollow">35</a></span>
+<span class="comment_author">kanyapond</span>
+<span class="comment_time">May 5, 2013 at 9:54 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-735027">
+<p>Thank you for your article, It&#8217;s very good. <img src='http://www.thegeekstuff.com/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-736371">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-736371" title="Permalink to this comment" rel="nofollow">36</a></span>
+<span class="comment_author">Houcheng Lin</span>
+<span class="comment_time">May 6, 2013 at 7:42 pm</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-736371">
+<p>Great and thank you <img src='http://www.thegeekstuff.com/wp-includes/images/smilies/icon_biggrin.gif' alt=':D' class='wp-smiley' /> </p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-823738">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-823738" title="Permalink to this comment" rel="nofollow">37</a></span>
+<span class="comment_author">sisayt</span>
+<span class="comment_time">June 26, 2013 at 2:36 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-823738">
+<p>Thank you very much brother</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-892023">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-892023" title="Permalink to this comment" rel="nofollow">38</a></span>
+<span class="comment_author">kaliswaran</span>
+<span class="comment_time">August 18, 2013 at 10:57 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-892023">
+<p>Reall!!! nice and useful article for system admin&#8217;s</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-936596">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-936596" title="Permalink to this comment" rel="nofollow">39</a></span>
+<span class="comment_author">yang</span>
+<span class="comment_time">September 16, 2013 at 6:58 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-936596">
+<p>Great ant thank you</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-962610">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-962610" title="Permalink to this comment" rel="nofollow">40</a></span>
+<span class="comment_author">laks</span>
+<span class="comment_time">October 4, 2013 at 4:08 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-962610">
+<p>good iptables structured and all administrator can easily understand this.</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-981199">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-981199" title="Permalink to this comment" rel="nofollow">41</a></span>
+<span class="comment_author">jeffin</span>
+<span class="comment_time">October 14, 2013 at 4:09 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-981199">
+<p>Very NIce Article&#8230; <img src='http://www.thegeekstuff.com/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-1063773">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-1063773" title="Permalink to this comment" rel="nofollow">42</a></span>
+<span class="comment_author">Ganesh</span>
+<span class="comment_time">November 27, 2013 at 3:42 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-1063773">
+<p>please add link for next page of current topic</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-1092458">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-1092458" title="Permalink to this comment" rel="nofollow">43</a></span>
+<span class="comment_author">Jame R</span>
+<span class="comment_time">December 7, 2013 at 1:01 am</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-1092458">
+<p>Absolute BEAUTIFUL article.  Very clear.  For shame ALL the other posts out there including MAN pages.</p>
+<p>A tear to my eye the series never continued&#8230;.</p>
+</div>
+					</dd>
+					<dt class="comment odd alt thread-odd thread-alt depth-1" id="comment-1123530">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-1123530" title="Permalink to this comment" rel="nofollow">44</a></span>
+<span class="comment_author">Sandeep</span>
+<span class="comment_time">December 18, 2013 at 1:08 am</span>
+
+					</dt>
+					<dd class="comment odd alt thread-odd thread-alt depth-1">
+<div class="format_text" id="comment-body-1123530">
+<p>Hi Ramesh Natarajan,<br />
+Thank you very much for your post. Earlier the concept of &#8216;iptables&#8217; was like a nightmare and too complicated and overwhelming to understand. Thank you very much for making the concept so simple. The clear and precise explanation should be appreciated.</p>
+</div>
+					</dd>
+					<dt class="comment even thread-even depth-1" id="comment-1128160">
+<span class="avatar"></span>
+<span class="comment_num"><a href="#comment-1128160" title="Permalink to this comment" rel="nofollow">45</a></span>
+<span class="comment_author">Anonymous</span>
+<span class="comment_time">December 19, 2013 at 3:17 pm</span>
+
+					</dt>
+					<dd class="comment even thread-even depth-1">
+<div class="format_text" id="comment-body-1128160">
+<p>Extremely well explained, as concepts were organized properly and follow a logical progression. Most other articles I read never actually explained the definition of a &#8220;chain&#8221;!&#8230;.. This article did a marvelous job.</p>
+</div>
+					</dd>
+				</dl>
+				<div id="respond">
+					<div id="respond_intro">
+						<p>Leave a Comment</p>
+					</div>
+					<form action="http://www.thegeekstuff.com/wp-comments-post.php" method="post" id="commentform">
+						<p><input class="text_input" type="text" name="author" id="author" value="" tabindex="1" /><label for="author">Name</label></p>
+						<p><input class="text_input" type="text" name="email" id="email" value="" tabindex="2" /><label for="email">E-mail</label></p>
+						<p><input class="text_input" type="text" name="url" id="url" value="" tabindex="3" /><label for="url">Website</label></p>
+						<p class="comment_box">
+							<textarea name="comment" id="comment" tabindex="4" cols="40" rows="8"></textarea>
+						</p>
+
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+						<p class="remove_bottom_margin">
+							<input name="submit" class="form_submit" type="submit" id="submit" tabindex="5" value="Submit" />
+<input type='hidden' name='comment_post_ID' value='7088' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="e6e9265eae" /></p>					</form>
+				</div>
+			</div>
+					<div class="prev_next post_nav">
+						<p class="previous">Previous post: <a href="http://www.thegeekstuff.com/2011/01/expect-expressions-loops-conditions/" rel="prev">Expect Script Tutorial: Expressions, If Conditions, For Loop, and While Loop Examples</a></p>
+						<p>Next post: <a href="http://www.thegeekstuff.com/2011/01/rsync-exclude-files-and-folders/" rel="next">6 rsync Examples to Exclude Multiple Files and Directories using exclude-from</a></p>
+					</div>
+		</div>
+
+		<div id="sidebars">
+			<div id="sidebar_1" class="sidebar">
+				<ul class="sidebar_list">
+<li class="widget widget_text" id="text-21">			<div class="textwidget"><a title="Subscribe via RSS" href="http://www.thegeekstuff.com/feed" rel="nofollow">RSS</a>&nbsp; | &nbsp;<a title="Subscribe via Email" href="http://feedburner.google.com/fb/a/mailverify?uri=TheGeekStuff&loc=en_US" rel="nofollow">Email</a>&nbsp; | &nbsp;<a title="Follow us on Twitter" href="http://twitter.com/thegeekstuff" rel="nofollow">Twitter</a>&nbsp; | &nbsp;<a title="Become a fan" href="http://www.facebook.com/thegeekstuff" rel="nofollow">Facebook</a>&nbsp; | &nbsp;<a title="Follow us on Google+" href="https://plus.google.com/112493711428194838421/posts">Google+</a>
+<br /><br />
+<form action="http://www.thegeekstuff.com/search" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="005666763606120661560:zkmegbt_djm" />
+    <input type="hidden" name="cof" value="FORID:10" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input style="background-color:#fffeee" type="text" name="q" size="40" />
+    <input style="border-color:#CCCCCC #999999 #999999 #CCCCCC; border-style:double; border-width:1px; overflow:visible;" type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load("elements", "1", {packages: "transliteration"});</script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/t13n?form=cse-search-box&t13n_langs=en"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<br /></div>
+		</li><li class="widget widget_text" id="text-3">			<div class="textwidget"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-8090601437064582";
+/* TGS Right Bar Rectangle Text Ad */
+google_ad_slot = "9054077260";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<br/></div>
+		</li><li class="widget widget_text" id="text-18"><h3>COURSE</h3>			<div class="textwidget"><ul>
+<li><a href="http://www.thegeekstuff.com/linux-sysadmin/">Linux Sysadmin CentOS 6 Course</a> - Master the Tools, Configure it Right, and be Lazy</li>
+</ul></div>
+		</li><li class="widget widget_text" id="text-4"><h3>EBOOKS</h3>			<div class="textwidget"><ul>
+<li><img title="Linux 101 Hacks Book" src="http://static.thegeekstuff.com/images/free-small.png" alt="Linux 101 Hacks Book" />&nbsp;<a href="http://www.thegeekstuff.com/linux-101-hacks-ebook/">Linux 101 Hacks 2nd Edition eBook</a> - Practical Examples to Build a Strong Foundation in Linux</li>
+<li><a href="http://www.thegeekstuff.com/bash-101-hacks-ebook/">Bash 101 Hacks eBook</a> - Take Control of Your Bash Command Line and Shell Scripting</li>
+<li><a href="http://www.thegeekstuff.com/sed-awk-101-hacks-ebook/">Sed and Awk 101 Hacks eBook</a> - Enhance Your UNIX / Linux Life with Sed and Awk</li>
+<li><a href="http://www.thegeekstuff.com/vim-101-hacks-ebook/">Vim 101 Hacks eBook</a> - Practical Examples for Becoming Fast and Productive in Vim Editor</li>
+<li><a href="http://www.thegeekstuff.com/nagios-core-ebook/">Nagios Core 3 eBook</a> - Monitor Everything, Be Proactive, and Sleep Well</li>
+</ul></div>
+		</li><li class="widget widget_text" id="text-17"><h3>POPULAR POSTS</h3>			<div class="textwidget"><ul>
+<li><a href="http://www.thegeekstuff.com/2009/01/12-amazing-and-essential-linux-books-to-enrich-your-brain-and-library/">12 Amazing and Essential Linux Books To Enrich Your Brain and Library</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/12/50-unix-linux-sysadmin-tutorials/">50 UNIX / Linux Sysadmin Tutorials</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/11/50-linux-commands/">50 Most Frequently Used UNIX / Linux Commands (With Examples)</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/gtd-getting-things-done/">How To Be Productive and Get Things Done Using GTD</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/03/30-things-to-do-when-you-are-bored-and-have-a-computer/">30 Things To Do When you are Bored and have a Computer</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/09/linux-file-system-structure/">Linux Directory Structure (File System Structure) Explained with Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/06/15-practical-crontab-examples/">Linux Crontab: 15 Awesome Cron Job Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples/">Get a Grip on the Grep! – 15 Practical Grep Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/07/linux-ls-command-examples/">Unix LS Command: 15 Practical Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/">15 Examples To Master Linux Command Line History</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/bug-tracking-system/">Top 10 Open Source Bug Tracking System</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/01/vi-and-vim-macro-tutorial-how-to-record-and-play/">Vi and Vim Macro Tutorial: How To Record and Play</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples/">Mommy, I found it! -- 15 Practical Linux Find Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/07/best-gmail-tips-and-tricks/">15 Awesome Gmail Tips and Tricks</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/06/expertise-in-google-search/">15 Awesome Google Search Tips and Tricks</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/raid-levels-tutorial/">RAID 0, RAID 1, RAID 5, RAID 10 Explained with Diagrams</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/01/15-practical-unix-linux-top-command-examples/">Can You Top This? 15 Practical Linux Top Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/09/top-5-best-network-monitoring-tools/">Top 5 Best System Monitoring Tools</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/06/top-5-best-linux-os-distributions/">Top 5 Best Linux OS Distributions</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/06/how-to-monitor-remote-linux-host-using-nagios-30/">How To Monitor Remote Linux Host using Nagios 3.0</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/01/awk-introduction-tutorial-7-awk-print-examples/">Awk Introduction Tutorial – 7 Awk Print Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/09/rsync-command-examples/">How to Backup Linux? 15 rsync Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/09/the-ultimate-wget-download-guide-with-15-awesome-examples/">The Ultimate Wget Download Guide With 15 Awesome Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/07/top-5-best-linux-text-editors/">Top 5 Best Linux Text Editors</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/tcpdump-command-examples/">Packet Analyzer: 15 TCPDUMP Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/06/bash-array-tutorial/">The Ultimate Bash Array Tutorial with 15 Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/11/3-steps-to-perform-ssh-login-without-password-using-ssh-keygen-ssh-copy-id/">3 Steps to Perform SSH Login Without Password Using ssh-keygen & ssh-copy-id</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/10/unix-sed-tutorial-advanced-sed-substitution-examples/">Unix Sed Tutorial: Advanced Sed Substitution Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/03/netstat-command-examples/">UNIX / Linux: 10 Netstat Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/06/the-ultimate-guide-for-creating-strong-passwords/">The Ultimate Guide for Creating Strong Passwords</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/6-steps-to-secure-your-home-wireless-network/">6 Steps to Secure Your Home Wireless Network</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/turbocharge-putty-with-12-powerful-add-ons-software-for-geeks-3/">Turbocharge PuTTY with 12 Powerful Add-Ons</a></li>
+</ul></div>
+		</li><li class="widget widget_text" id="text-19"><h3>CATEGORIES</h3>			<div class="textwidget"><ul>
+<li><a rel="nofollow" href="/category/linux/">Linux Tutorials</a></li>
+<li><a rel="nofollow" href="/category/vim-2/">Vim Editor</a></li>
+<li><a rel="nofollow" href="/category/sed/">Sed Scripting</a></li>
+<li><a rel="nofollow" href="/category/awk/">Awk Scripting</a></li>
+<li><a rel="nofollow" href="/category/bash-2/">Bash Shell Scripting</a></li>
+<li><a rel="nofollow" href="/category/nagios-2/">Nagios Monitoring</a></li>
+<li><a rel="nofollow" href="/category/openssh-2/">OpenSSH</a></li>
+<li><a rel="nofollow" href="/category/iptables/">IPTables Firewall</a></li>
+<li><a rel="nofollow" href="/category/apache/">Apache Web Server</a></li>
+<li><a rel="nofollow" href="/category/mysql/">MySQL Database</a></li>
+<li><a rel="nofollow" href="/category/perl/">Perl Programming</a></li>
+<li><a rel="nofollow" href="/category/google/">Google Tutorials</a></li>
+<li><a rel="nofollow" href="/category/ubuntu/">Ubuntu Tutorials</a></li>
+<li><a rel="nofollow" href="/category/postgresql/">PostgreSQL DB</a></li>
+<li><a rel="nofollow" href="/category/hello-world/">Hello World Examples</a></li>
+<li><a rel="nofollow" href="/category/c-programming/">C Programming</a></li>
+<li><a rel="nofollow" href="/category/c-plus-plus/">C++ Programming</a></li>
+<li><a rel="nofollow" href="/category/dell-2/">DELL Server Tutorials</a></li>
+<li><a rel="nofollow" href="/category/oracle/">Oracle Database</a></li>
+<li><a rel="nofollow" href="/category/vmware/">VMware Tutorials</a></li>
+</ul></div>
+		</li><li class="widget widget_text" id="text-20">			<div class="textwidget"><g:person href="https://plus.google.com/112493711428194838421" data-rel="author" layout="landscape"></g:person></div>
+		</li>				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+<div class="col_footer1">
+	<ul class="sidebar_list">
+<li id="text-7" class="widget widget_text"><h3>About The Geek Stuff</h3>			<div class="textwidget"><br />
+<img class="float" title="Ramesh Natarajan" src="http://static.thegeekstuff.com/images/ramesh-small.gif" alt="Linux 101 Hacks Book" />
+My name is <strong>Ramesh Natarajan</strong>. I will be posting instruction guides, how-to, troubleshooting tips and tricks on Linux, database, hardware, security and web. My focus is to write articles that will either teach you or help you resolve a problem. Read more about <a href="http://www.thegeekstuff.com/about/">Ramesh Natarajan</a> and the blog.</div>
+		</li>
+<li id="text-8" class="widget widget_text"><h3>Support Us</h3>			<div class="textwidget"><br />
+Support this blog by purchasing one of my ebooks.
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/bash-101-hacks-ebook/">Bash 101 Hacks eBook</a>
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/sed-awk-101-hacks-ebook/">Sed and Awk 101 Hacks eBook</a>
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/vim-101-hacks-ebook/">Vim 101 Hacks eBook</a>
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/nagios-core-ebook/">Nagios Core 3 eBook</a></div>
+		</li>
+<li id="text-9" class="widget widget_text"><h3>Contact Us</h3>			<div class="textwidget"><br />
+<strong>Email Me :</strong>
+Use this <a href="http://www.thegeekstuff.com/contact" rel="nofollow">Contact Form</a> to get in touch me with your comments, questions or suggestions about this site. You can also simply drop me a line to say hello!.
+<br /><br />
+<a title="Follow us on Google+" href="https://plus.google.com/112493711428194838421/posts">Follow us on Google+</a>
+<br /><br />
+<a title="Follow us on Twitter" href="http://twitter.com/thegeekstuff" rel="nofollow">Follow us on Twitter</a>
+<br /><br />
+<a href="
+http://www.facebook.com/thegeekstuff" rel="nofollow">Become a fan on Facebook</a>&nbsp;&nbsp;</div>
+		</li>
+	</ul>
+</div>
+
+<div class="cb"></div>
+	<p>Copyright &copy; 2008&ndash;2014 Ramesh Natarajan. All rights reserved  | 
+<a href="http://www.thegeekstuff.com/copyright">Terms of Service</a> </p>	</div>
+</div>
+</div>
+<!--[if lte IE 8]>
+<div id="ie_clear"></div>
+<![endif]-->
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5302569-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+Content Delivery Network via Amazon Web Services: CloudFront: static.thegeekstuff.com
+
+ Served from: www.thegeekstuff.com @ 2014-02-02 04:22:22 by W3 Total Cache -->

@@ -1,0 +1,7 @@
+TCP wrappers  - DONE -
+Ip tables (backup iptables , restore ,chain)
+PAM policy
+NTP
+KICK start with PXE
+Backups
+sudo

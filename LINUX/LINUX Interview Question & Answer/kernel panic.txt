@@ -1,0 +1,59 @@
+In Linux, By default after kernel panic, Linux waits for a system admin to restart or power cycle server.. We can change this behavior and set to reboot automatically when a kernel panic occurs.. For that, we have to change the value set on "kernel.panic" kernel parameter.
+ 
+
+Now we have to check the current value on this kernel parameter in Linux server:
+ 
+[root@myserver ~]# cat /proc/sys/kernel/panic
+ 0
+ [root@myserver ~]# sysctl -a | grep kernel.panic
+ kernel.panic = 0
+ 
+To make the Linux server automatically reboot after a kernel panic, we have to set a value greater than 0. The value should be the number of seconds to wait before automatic reboot of the server. 
+ 
+
+For example , if you set value 60 , then the server will wait for 60 seconds before automatic reboot after the kernel panic. To make this change permanent, edit /etc/sysctl.conf and set it there.
+ 
+[root@myserver ~]# echo "10" > /proc/sys/kernel/panic
+ [root@myserver ~]# cat /etc/sysctl.conf |  grep kernel.panic 
+ kernel.panic = 10
+
+
+ques:- what is kernel panic error ? how will you fix it if you have face it after rebooting without the the help of rescue disk ?
+ans-
+Many of the Mac OSX or similar Unix like operating system
+users may face a type of error known as “Kernel Panic”. When
+this error message get displayed, you need to restart your
+system as your system stops working and require restart.
+Since the system is not in the state that you can perform
+the normal restart and therefore you need to force restart
+the computer. At that time if you were in the middle of the
+process or working with some kind of unsaved document then
+it will also be lose.
+
+The general causes of kernel panic in Mac OS X include:
+
+   1. Defective or incompatible RAM
+   2. Incompatible, obsolete or corrupted kernel extensions
+   3. Incompatible, obsolete or corrupted Drivers
+   4. Hard Disk corruption that include bad sectors,
+directory corruption and other hard disk errors
+   5. Incorrect permissions on System files and folders
+   6. Less RAM or Hard Drive Memory
+   7. Defects in hardware, CPU or programming errors
+   8. Incompatible hardware
+
+Other than these the Mac Kernel Panic occurs when the core
+component of Mac (kernel) gets an unexpected user
+instruction and fails to handle that instruction properly.
+
+Kernel Panic Fix in Mac OS X
+
+It is monitored that the kernel panic does not come
+frequently but if it’s occurred then restarting the computer
+will solve the problem but if the error occurs due to the
+corrupted/incompatible system resources then reinstall Mac
+OSX. When you go for the fresh installation of Mac OSX, the
+primary volume need to be formatted and all the data present
+over that volume will be lost. This condition can be a bad
+dream as you can lose lots of important data which you had
+saved on that system volume.

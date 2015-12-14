@@ -1,0 +1,42 @@
+Writing Perl and Shell scripts for automating daily routine tasks.
+
+RESPONSIBILITIES:
+
+
+
+• Provide technical troubleshooting for internal users
+• All-round support for desktops/servers/network
+• Maintenance of IT asset/inventory
+• Provide excellent customer service to ensure quality service is delivered
+• Work with team on implementation/enhancement/upgrading projects
+• Perform Automation daily routine task by using shell scripting
+• Monitor, backup, and ensure smooth daily operation
+
+
+Experienced in writing shell scripts and more aligned towards automating daily routine processes which would effectively reduce the time and effort.
+
+
+•Resolving tickets escalated by lower levels of support. 
+•File system management on various platforms. LVM configuration and maintenance. 
+•Development of Perl and Shell scripts for automation of daily tasks. 
+--------------------
+Good backup link
+1-https://wiki.archlinux.org/index.php/Full_System_Backup_with_tar
+
+2- https://wiki.archlinux.org/index.php/Full_System_Backup_with_rsync
+
+3-http://www.cyberciti.biz/tips/perform-backups-for-the-linux-operating-system.html
+
+4- http://bash.cyberciti.biz/shell/backup/  
+must open and implement one by one.
+5-http://helpdeskgeek.com/linux-tips/shell-script-backup-directory-linux/
+6-http://www.panix.com/~elflord/unix/bash-tute.html
+7-http://www.aboutlinux.info/2005/10/10-seconds-guide-to-bash-shell.html     good one
+-------------------
+read
+BACK UPSCRIPTING
+BACKUP TYPE
+
+DUmp and restore
+
+user management
